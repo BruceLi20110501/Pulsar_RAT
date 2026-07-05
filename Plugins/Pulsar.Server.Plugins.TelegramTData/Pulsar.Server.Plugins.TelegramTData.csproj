@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup>
+  <TargetFramework>net9.0-windows</TargetFramework>
+  <UseWindowsForms>true</UseWindowsForms>
+  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+</PropertyGroup>
+<ItemGroup>
+  <ProjectReference Include="..\..\Pulsar.Common\Pulsar.Common.csproj" />
+  <ProjectReference Include="..\..\Pulsar.Server\Pulsar.Server.csproj" />
+</ItemGroup>
+<ItemGroup>
+  <PackageReference Include="Fody" Version="6.9.2">
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+  </PackageReference>
+  <PackageReference Include="Costura.Fody" Version="6.0.0">
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+  </PackageReference>
+</ItemGroup>
+  <Target Name="CopyToServerPluginFolder" AfterTargets="Build">
+    <PropertyGroup>
+      <ServerExeDir>$(MSBuildProjectDirectory)\..\..\Pulsar.Server\bin\$(Configuration)\net9.0-windows\</ServerExeDir>
+      <ServerPluginsDir>$(ServerExeDir)Plugins\</ServerPluginsDir>
+    </PropertyGroup>
+    <Message Text="Copying plugin to $(ServerPluginsDir)" Importance="High" />
+    <MakeDir Directories="$(ServerPluginsDir)" Condition="!Exists('$(ServerPluginsDir)')" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ServerPluginsDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>

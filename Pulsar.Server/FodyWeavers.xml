@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
+  <Costura>
+    <ExcludeAssemblies>
+      AForge
+      AForge.Video
+      AForge.Video.DirectShow
+      Gma.System.MouseKeyHook
+      NAudio.Core
+      NAudio.Wasapi
+      NAudio.WinForms
+      NAudio.WinMM
+      SharpDX
+      SharpDX.D3DCompiler
+      SharpDX.Direct2D1
+      SharpDX.Direct3D11
+      SharpDX.DXGI
+      SharpDX.Mathematics
+    </ExcludeAssemblies>
+    <UnmanagedWinX64Assemblies>
+      SkiaSharp
+      HarfBuzzSharp
+    </UnmanagedWinX64Assemblies>
+    <IncludeRuntimeReferences>false</IncludeRuntimeReferences>
+  </Costura>
+</Weavers>
