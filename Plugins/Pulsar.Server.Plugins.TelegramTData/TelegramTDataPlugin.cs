@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -26,8 +28,21 @@ namespace Pulsar.Server.Plugins.TelegramTData
             _pluginDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? AppDomain.CurrentDomain.BaseDirectory;
             _clientDll = LoadClientDll();
 
-            context.AddClientContextMenuItem(new[] { "Telegram" }, "Telegram TData", OnOpenTDataWindow);
+            context.AddClientContextMenuItem(new[] { "Telegram" }, "Telegram TData", LoadMenuIcon(), OnOpenTDataWindow);
             context.Log("Telegram TData插件已初始化");
+        }
+
+        private static Icon LoadMenuIcon()
+        {
+            try
+            {
+                var resources = new ComponentResourceManager(typeof(FrmTelegramTData));
+                return resources.GetObject("$this.Icon") as Icon;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public void Dispose()

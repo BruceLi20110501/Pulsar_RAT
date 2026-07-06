@@ -60,7 +60,7 @@ namespace Pulsar.Server.Statistics
         {
             var grouped = source
                 .GroupBy(selector)
-                .Select(g => new { Label = string.IsNullOrWhiteSpace(g.Key) ? "Unknown" : g.Key.Trim(), Count = g.Count() })
+                .Select(g => new { Label = string.IsNullOrWhiteSpace(g.Key) ? "未知" : g.Key.Trim(), Count = g.Count() })
                 .OrderByDescending(g => g.Count)
                 .ThenBy(g => g.Label)
                 .ToList();
@@ -113,7 +113,7 @@ namespace Pulsar.Server.Statistics
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                return "Unknown";
+                return "未知";
             }
 
             return value.Trim();

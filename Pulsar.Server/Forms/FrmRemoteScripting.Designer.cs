@@ -1,4 +1,4 @@
-﻿namespace Pulsar.Server.Forms
+namespace Pulsar.Server.Forms
 {
     partial class FrmRemoteScripting
     {
@@ -55,7 +55,7 @@
             this.ExecBtn.Name = "ExecBtn";
             this.ExecBtn.Size = new System.Drawing.Size(75, 23);
             this.ExecBtn.TabIndex = 1;
-            this.ExecBtn.Text = "Execute";
+            this.ExecBtn.Text = "执行";
             this.ExecBtn.UseVisualStyleBackColor = true;
             this.ExecBtn.Click += new System.EventHandler(this.ExecBtn_Click);
             // 
@@ -151,7 +151,7 @@
             this.VBSEdit.Name = "VBSEdit";
             this.VBSEdit.Size = new System.Drawing.Size(534, 379);
             this.VBSEdit.TabIndex = 1;
-            this.VBSEdit.Text = "MsgBox \"Hello you are being administrated using Pulsar Continuation\"";
+            this.VBSEdit.Text = "MsgBox \"您正在通过 Pulsar 接受远程管理\"";
             // 
             // tabPage4
             // 
@@ -172,7 +172,7 @@
             this.JSEdit.Name = "JSEdit";
             this.JSEdit.Size = new System.Drawing.Size(534, 379);
             this.JSEdit.TabIndex = 1;
-            this.JSEdit.Text = "alert(\"Hello you are being administrated using Pulsar Continuation\");";
+            this.JSEdit.Text = "alert(\"您正在通过 Pulsar 接受远程管理\");";
             // 
             // HidCheckBox
             // 
@@ -182,7 +182,7 @@
             this.HidCheckBox.Name = "HidCheckBox";
             this.HidCheckBox.Size = new System.Drawing.Size(60, 17);
             this.HidCheckBox.TabIndex = 3;
-            this.HidCheckBox.Text = "Hidden";
+            this.HidCheckBox.Text = "隐藏执行";
             this.HidCheckBox.UseVisualStyleBackColor = true;
             // 
             // FrmRemoteScripting
@@ -190,6 +190,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 431);
+            this.MinimumSize = new System.Drawing.Size(450, 300);
             this.Controls.Add(this.HidCheckBox);
             this.Controls.Add(this.TestBtn);
             this.Controls.Add(this.ExecBtn);
@@ -197,7 +198,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmRemoteScripting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmRemoteScripting";
+            this.Text = "远程脚本 []";
             this.Load += new System.EventHandler(this.FrmRemoteScripting_Load);
             this.dotNetBarTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

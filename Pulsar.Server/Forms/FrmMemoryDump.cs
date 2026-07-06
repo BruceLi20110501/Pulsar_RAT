@@ -7,6 +7,7 @@ using Pulsar.Server.Networking;
 using Pulsar.Server.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Forms;
 
 namespace Pulsar.Server.Forms
@@ -123,16 +124,17 @@ namespace Pulsar.Server.Forms
                 {
                     labelProgress.Text = $"进度：{Math.Round((double)(transfer.TransferredSize / this._dumpedProcess.Length), 2)}%";
                 }
+                string localizedStatus = LocalizeStatus(transfer.Status);
                 if (labelValue.InvokeRequired)
                 {
                     labelValue.BeginInvoke((MethodInvoker)delegate
                     {
-                        labelValue.Text = transfer.Status;
+                        labelValue.Text = localizedStatus;
                     });
                 }
                 else
                 {
-                    labelValue.Text = transfer.Status;
+                    labelValue.Text = localizedStatus;
                 }
             }
         }
@@ -147,7 +149,7 @@ namespace Pulsar.Server.Forms
 
         private void FrmMemoryDump_Load(object sender, EventArgs e)
         {
-            this.Text = WindowHelper.GetWindowTitle("Memory Dump", _connectClient) + $" => {_dumpedProcess.Pid} : {_dumpedProcess.ProcessName}";
+            this.Text = WindowHelper.GetWindowTitle("内存转储", _connectClient) + $" => {_dumpedProcess.Pid} : {_dumpedProcess.ProcessName}";
         }
 
         private void FrmMemoryDump_FormClosing(object sender, FormClosingEventArgs e)
@@ -159,6 +161,20 @@ namespace Pulsar.Server.Forms
         private void FrmMemoryDump_Shown(object sender, EventArgs e)
         {
             _dumpHandler.BeginDumpDownload(_dumpedProcess);
+        }
+
+        private static string LocalizeStatus(string status)
+        {
+            switch (status)
+            {
+                case "Completed": return "已完成";
+                case "Downloading": return "下载中";
+                case "Uploading": return "上传中";
+                case "Pending": return "等待中";
+                case "Canceled": return "已取消";
+                case "Failed": return "失败";
+                default: return status;
+            }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace Pulsar.Server.Statistics
         {
             CountryCode2 = string.IsNullOrWhiteSpace(countryCode2) ? "" : countryCode2;
             CountryCode3 = string.IsNullOrWhiteSpace(countryCode3) ? "" : countryCode3;
-            Name = string.IsNullOrWhiteSpace(name) ? "Unknown" : name;
+            Name = string.IsNullOrWhiteSpace(name) ? "未知" : name;
             Count = count;
             Share = share;
         }

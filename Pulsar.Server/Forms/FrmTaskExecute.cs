@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Forms.DarkMode;
+using Pulsar.Server.Forms.DarkMode;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +31,7 @@ namespace Pulsar.Server.Forms
             FrmMain frm = Application.OpenForms["FrmMain"] as FrmMain;
             if (frm != null)
             {
-                frm.AddTask("Remote Execute", FPTextBox.Text, "");
+                frm.AddTask("远程执行", FPTextBox.Text, "");
             }
         }
 
@@ -40,8 +40,8 @@ namespace Pulsar.Server.Forms
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Title = "Select a File";
-                openFileDialog.Filter = "All Files (*.*)|*.*";
+                openFileDialog.Title = "选择文件";
+                openFileDialog.Filter = "所有文件 (*.*)|*.*";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     FPTextBox.Text = openFileDialog.FileName;

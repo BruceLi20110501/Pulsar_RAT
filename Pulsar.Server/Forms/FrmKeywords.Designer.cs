@@ -1,4 +1,4 @@
-﻿namespace Pulsar.Server.Forms
+namespace Pulsar.Server.Forms
 {
     partial class FrmKeywords
     {
@@ -53,7 +53,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Key-words list.";
+            this.label1.Text = "关键词列表";
             // 
             // SaveNoti
             // 
@@ -61,7 +61,7 @@
             this.SaveNoti.Name = "SaveNoti";
             this.SaveNoti.Size = new System.Drawing.Size(75, 23);
             this.SaveNoti.TabIndex = 2;
-            this.SaveNoti.Text = "Save";
+            this.SaveNoti.Text = "保存";
             this.SaveNoti.UseVisualStyleBackColor = true;
             this.SaveNoti.Click += new System.EventHandler(this.SaveNoti_Click);
             // 
@@ -70,6 +70,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(469, 322);
+            this.MinimumSize = new System.Drawing.Size(350, 250);
             this.Controls.Add(this.SaveNoti);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.NotiRichTextBox);

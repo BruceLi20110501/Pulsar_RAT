@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)messagepackanalyzer\3.1.4\build\MessagePackAnalyzer.targets" Condition="Exists('$(NuGetPackageRoot)messagepackanalyzer\3.1.4\build\MessagePackAnalyzer.targets')" />
+    <Import Project="$(NuGetPackageRoot)fody\6.9.2\build\Fody.targets" Condition="Exists('$(NuGetPackageRoot)fody\6.9.2\build\Fody.targets')" />
+    <Import Project="$(NuGetPackageRoot)costura.fody\6.0.0\build\Costura.Fody.targets" Condition="Exists('$(NuGetPackageRoot)costura.fody\6.0.0\build\Costura.Fody.targets')" />
+  </ImportGroup>
+</Project>

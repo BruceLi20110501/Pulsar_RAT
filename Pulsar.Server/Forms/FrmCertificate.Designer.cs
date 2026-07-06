@@ -1,4 +1,4 @@
-﻿namespace Pulsar.Server.Forms
+namespace Pulsar.Server.Forms
 {
     partial class FrmCertificate
     {
@@ -139,7 +139,7 @@
             MinimizeBox = false;
             Name = "FrmCertificate";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Pulsar 企业版 - 证书向导";
+            Text = "Pulsar STNull - 证书向导";
             Load += FrmCertificate_Load;
             ResumeLayout(false);
             PerformLayout();

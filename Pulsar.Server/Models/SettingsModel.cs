@@ -5,7 +5,7 @@ namespace Pulsar.Server.Models
     public class SettingsModel
     {
         [JsonProperty("darkMode")]
-        public bool DarkMode { get; set; } = false;
+        public bool DarkMode { get; set; } = true;
 
         [JsonProperty("hideFromScreenCapture")]
         public bool HideFromScreenCapture { get; set; } = false;

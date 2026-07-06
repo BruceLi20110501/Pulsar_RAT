@@ -20,24 +20,26 @@ namespace Pulsar.Server.Controls.Wpf
     {
         private static readonly SKColor[] LightPalette =
         {
-            SKColor.Parse("#1976D2"),
-            SKColor.Parse("#388E3C"),
-            SKColor.Parse("#F57C00"),
-            SKColor.Parse("#7B1FA2"),
-            SKColor.Parse("#C2185B"),
-            SKColor.Parse("#0097A7"),
-            SKColor.Parse("#AFB42B")
+            SKColor.Parse("#3B82F6"),
+            SKColor.Parse("#10B981"),
+            SKColor.Parse("#F59E0B"),
+            SKColor.Parse("#8B5CF6"),
+            SKColor.Parse("#EC4899"),
+            SKColor.Parse("#06B6D4"),
+            SKColor.Parse("#84CC16"),
+            SKColor.Parse("#F97316")
         };
 
         private static readonly SKColor[] DarkPalette =
         {
-            SKColor.Parse("#64B5F6"),
-            SKColor.Parse("#81C784"),
-            SKColor.Parse("#FFB74D"),
-            SKColor.Parse("#BA68C8"),
-            SKColor.Parse("#F06292"),
-            SKColor.Parse("#4DD0E1"),
-            SKColor.Parse("#DCE775")
+            SKColor.Parse("#60A5FA"),
+            SKColor.Parse("#34D399"),
+            SKColor.Parse("#FBBF24"),
+            SKColor.Parse("#A78BFA"),
+            SKColor.Parse("#F472B6"),
+            SKColor.Parse("#22D3EE"),
+            SKColor.Parse("#A3E635"),
+            SKColor.Parse("#FB923C")
         };
 
         private readonly ObservableCollection<StatCardViewModel> _statCards = new()
@@ -181,10 +183,10 @@ namespace Pulsar.Server.Controls.Wpf
 
         private void UpdateCards(ClientStatisticsSnapshot snapshot)
         {
-            _statCards[0].Update(snapshot.TotalClients.ToString("N0"), "Unique clients recorded");
-            _statCards[1].Update(snapshot.OnlineClients.ToString("N0"), "Currently connected");
-            _statCards[2].Update(snapshot.OfflineClients.ToString("N0"), "Seen but offline");
-            _statCards[3].Update(snapshot.NewClientsLast7Days.ToString("N0"), "Joined in last 7 days");
+            _statCards[0].Update(snapshot.TotalClients.ToString("N0"), "已记录的唯一客户端");
+            _statCards[1].Update(snapshot.OnlineClients.ToString("N0"), "当前在线");
+            _statCards[2].Update(snapshot.OfflineClients.ToString("N0"), "已记录但离线");
+            _statCards[3].Update(snapshot.NewClientsLast7Days.ToString("N0"), "近 7 天新增");
         }
 
         private void BuildSeries()
@@ -200,7 +202,7 @@ namespace Pulsar.Server.Controls.Wpf
             var separator = GetSeparatorColor();
 
             var dailyValues = _lastSnapshot.NewClientsByDay.Select(d => d.Count).ToArray();
-            var labels = _lastSnapshot.NewClientsByDay.Select(d => d.Date.ToString("MMM dd")).ToArray();
+            var labels = _lastSnapshot.NewClientsByDay.Select(d => d.Date.ToString("M月d日")).ToArray();
 
             NewClientsSeries = new ISeries[]
             {
@@ -257,17 +259,17 @@ namespace Pulsar.Server.Controls.Wpf
                         Values = new[] { entry.Count },
                         Name = entry.Label,
                         Fill = new SolidColorPaint(palette[index % palette.Length]),
-                        Stroke = new SolidColorPaint(stroke) { StrokeThickness = 1.5f },
+                        Stroke = new SolidColorPaint(stroke) { StrokeThickness = 2f },
                         DataLabelsPaint = new SolidColorPaint(axisText),
-                        DataLabelsSize = 12,
-                        DataLabelsPosition = PolarLabelsPosition.Middle,
+                        DataLabelsSize = 11,
+                        DataLabelsPosition = PolarLabelsPosition.Outer,
                         DataLabelsFormatter = point =>
                         {
-                            var value = point.Model;
-                            return value > 0
-                                ? $"{entry.Label}: {value:N0} ({entry.Share:P1})"
-                                : entry.Label;
-                        }
+                            return entry.Share >= 0.05
+                                ? $"{entry.Label} ({entry.Share:P0})"
+                                : "";
+                        },
+                        InnerRadius = 40
                     };
 
                     return pieSeries;
@@ -284,14 +286,19 @@ namespace Pulsar.Server.Controls.Wpf
             {
                 Values = values,
                 Fill = new SolidColorPaint(accent),
-                Stroke = null
+                Stroke = null,
+                Rx = 4,
+                Ry = 4,
+                MaxBarWidth = 32,
+                Padding = 8
             };
 
             if (values.Length <= 10 && values.Any(v => v > 0))
             {
                 series.DataLabelsPaint = new SolidColorPaint(axisText);
                 series.DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top;
-                series.DataLabelsFormatter = point => point.Model.ToString("N0");
+                series.DataLabelsSize = 12;
+                series.DataLabelsFormatter = point => point.Model > 0 ? point.Model.ToString("N0") : "";
             }
 
             return series;
@@ -306,11 +313,11 @@ namespace Pulsar.Server.Controls.Wpf
             ClientsByOperatingSystemSeries = Array.Empty<ISeries>();
         }
 
-        private SKColor GetAccentColor() => _isDarkMode ? SKColor.Parse("#64B5F6") : SKColor.Parse("#1E88E5");
+        private SKColor GetAccentColor() => _isDarkMode ? SKColor.Parse("#60A5FA") : SKColor.Parse("#3B82F6");
 
-        private SKColor GetAxisTextColor() => _isDarkMode ? SKColors.White : SKColor.Parse("#1A1A1A");
+        private SKColor GetAxisTextColor() => _isDarkMode ? SKColor.Parse("#CBD5E1") : SKColor.Parse("#374151");
 
-        private SKColor GetSeparatorColor() => _isDarkMode ? SKColor.Parse("#424242") : SKColor.Parse("#BDBDBD");
+        private SKColor GetSeparatorColor() => _isDarkMode ? SKColor.Parse("#2A2D3A") : SKColor.Parse("#E5E7EB");
 
         private bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {

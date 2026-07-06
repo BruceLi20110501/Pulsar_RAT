@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Controls.HexEditor;
+using Pulsar.Server.Controls.HexEditor;
 
 namespace Pulsar.Server.Forms
 {
@@ -95,7 +95,6 @@ namespace Pulsar.Server.Forms
             // 
             // hexEditor
             // 
-            this.hexEditor.BackColor = System.Drawing.Color.White;
             this.hexEditor.BorderColor = System.Drawing.Color.Empty;
             this.hexEditor.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.hexEditor.EntityMargin = 8;

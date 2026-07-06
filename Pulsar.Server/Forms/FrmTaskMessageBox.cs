@@ -30,7 +30,7 @@ namespace Pulsar.Server.Forms
             FrmMain frm = Application.OpenForms["FrmMain"] as FrmMain;
             if (frm != null)
             {
-                frm.AddTask("Message Box", TTextBox.Text, MTextBox.Text);
+                frm.AddTask("消息框", TTextBox.Text, MTextBox.Text);
             }
         }
     }

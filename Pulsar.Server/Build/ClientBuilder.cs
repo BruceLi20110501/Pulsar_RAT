@@ -1,4 +1,4 @@
-﻿using Mono.Cecil;
+using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Pulsar.Common.Cryptography;
 using Pulsar.Server.Models;
@@ -71,7 +71,7 @@ namespace Pulsar.Server.Build
                 string serverDirectory = Path.GetDirectoryName(Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location));
                 if (outputDirectory.Equals(serverDirectory, StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show("The output path cannot be in the same directory as the server executable. Please choose a different output path.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("输出路径不能与服务端可执行文件位于同一目录，请选择其他输出路径。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                     return true;
                 }
 

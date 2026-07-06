@@ -1,0 +1,15 @@
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.Client.csproj.AssemblyReference.cache
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.Client.csproj.SuggestedBindingRedirects.cache
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Client.exe.config
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.Client.FrmRemoteChat.resources
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.Client.Helper.HVNC.CloneProgressForm.resources
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.Client.Properties.Resources.resources
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.Client.csproj.GenerateResource.cache
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.Client.GeneratedMSBuildEditorConfig.editorconfig
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.Client.csproj.CoreCompileInputs.cache
+X:\StanleyRAT\最新三改自用\bin\Release\net48\Client.exe.config
+X:\StanleyRAT\最新三改自用\bin\Release\net48\Client.exe
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.Client.csproj.Fody.CopyLocal.cache
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.Client.csproj.Fody.RuntimeCopyLocal.cache
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Pulsar.C.06380F7D.Up2Date
+X:\StanleyRAT\最新三改自用\Pulsar.Client\obj\Release\net48\Client.exe

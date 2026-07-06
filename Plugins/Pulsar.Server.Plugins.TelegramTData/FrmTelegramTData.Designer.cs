@@ -65,6 +65,7 @@ namespace Pulsar.Server.Plugins.TelegramTData
             lvwProcesses.TabIndex = 1;
             lvwProcesses.UseCompatibleStateImageBehavior = false;
             lvwProcesses.View = System.Windows.Forms.View.Details;
+            lvwProcesses.SelectedIndexChanged += lvwProcesses_SelectedIndexChanged;
             // 
             // colPid
             // 
@@ -78,22 +79,23 @@ namespace Pulsar.Server.Plugins.TelegramTData
             // 
             // cmsProcess
             // 
+            cmsProcess.ImageScalingSize = new System.Drawing.Size(20, 20);
             cmsProcess.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiDownload, tsmiDownloadAll });
             cmsProcess.Name = "cmsProcess";
-            cmsProcess.Size = new System.Drawing.Size(227, 48);
+            cmsProcess.Size = new System.Drawing.Size(196, 52);
             cmsProcess.Opening += cmsProcess_Opening;
             // 
             // tsmiDownload
             // 
             tsmiDownload.Name = "tsmiDownload";
-            tsmiDownload.Size = new System.Drawing.Size(226, 22);
+            tsmiDownload.Size = new System.Drawing.Size(195, 24);
             tsmiDownload.Text = "下载选中的TData";
             tsmiDownload.Click += tsmiDownload_Click;
             // 
             // tsmiDownloadAll
             // 
             tsmiDownloadAll.Name = "tsmiDownloadAll";
-            tsmiDownloadAll.Size = new System.Drawing.Size(226, 22);
+            tsmiDownloadAll.Size = new System.Drawing.Size(195, 24);
             tsmiDownloadAll.Text = "下载全部TData";
             tsmiDownloadAll.Click += tsmiDownloadAll_Click;
             // 

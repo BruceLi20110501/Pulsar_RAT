@@ -1,18 +1,56 @@
-﻿using Pulsar.Server.DiscordRPC;
+using Pulsar.Server.DiscordRPC;
 using Pulsar.Server.Forms;
 using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Pulsar.Server
 {
     static class Program
     {
+        static Program()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += ResolveChartingAssemblies;
+        }
+
+        /// <summary>
+        /// LiveCharts WPF builds reference SkiaSharp 2.88 while NuGet resolves SkiaSharp 3.x.
+        /// Load loose DLLs from the output directory when Costura is not embedding them.
+        /// </summary>
+        private static Assembly? ResolveChartingAssemblies(object? sender, ResolveEventArgs args)
+        {
+            var requested = new AssemblyName(args.Name);
+            switch (requested.Name)
+            {
+                case "SkiaSharp":
+                case "SkiaSharp.HarfBuzz":
+                case "SkiaSharp.Views.Desktop.Common":
+                case "SkiaSharp.Views.WPF":
+                case "LiveChartsCore":
+                case "LiveChartsCore.SkiaSharpView":
+                case "LiveChartsCore.SkiaSharpView.WPF":
+                case "HarfBuzzSharp":
+                {
+                    var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, requested.Name + ".dll");
+                    if (File.Exists(path))
+                    {
+                        return Assembly.LoadFrom(path);
+                    }
+
+                    break;
+                }
+            }
+
+            return null;
+        }
+
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 
             using (FrmMain mainForm = new FrmMain())
             {

@@ -1,4 +1,4 @@
-﻿using Gma.System.MouseKeyHook;
+using Gma.System.MouseKeyHook;
 using Pulsar.Common.Enums;
 using Pulsar.Common.Messages;
 using Pulsar.Common.Messages.Monitoring.Clipboard;
@@ -98,6 +98,7 @@ namespace Pulsar.Server.Forms
         private bool _useGPU = false;
 
         private int _sizeFrames = 0; // independent counter for size label updates
+        private float _dpiScale = 1f; // 当前 DPI 缩放系数，用于运行时切换图标后重新缩放
 
         /// <summary>
         /// Creates a new remote desktop form for the client or gets the current open form, if there exists one already.
@@ -164,6 +165,23 @@ namespace Pulsar.Server.Forms
 
             // Update tooltip text for bidirectional clipboard
             toolTipButtons.SetToolTip(this.btnBiDirectionalClipboard, "启用双向剪贴板同步");
+
+            ApplyHighDpiImages();
+        }
+
+        private void ApplyHighDpiImages()
+        {
+            _dpiScale = DpiImageScaling.GetScaleFactor(this);
+
+            // 固定图标按钮（不切换图标）。
+            DpiImageScaling.ApplyToIconButton(btnBiDirectionalClipboard, _dpiScale);
+            DpiImageScaling.ApplyToIconButton(btnStartProgramOnDisplay, _dpiScale);
+
+            // 运行时会切换图标的按钮：以当前 Image 为源缩放，切换时再各自重新缩放。
+            DpiImageScaling.SetScaledButtonIcon(btnMouse, btnMouse.Image, _dpiScale);
+            DpiImageScaling.SetScaledButtonIcon(btnKeyboard, btnKeyboard.Image, _dpiScale);
+            DpiImageScaling.SetScaledButtonIcon(enableGPU, enableGPU.Image, _dpiScale);
+            DpiImageScaling.SetScaledButtonIcon(btnShowDrawingTools, btnShowDrawingTools.Image, _dpiScale);
         }
 
         /// <summary>
@@ -171,8 +189,12 @@ namespace Pulsar.Server.Forms
         /// </summary>
         private void ConfigureDrawingButtons()
         {
+            float scale = DpiImageScaling.GetScaleFactor(this);
+            // 按钮尺寸随 DPI 缩放，BackgroundImage 用 Zoom 会自动跟着等比放大，避免高分辨率下图标偏小。
+            Size btnSize = new Size((int)Math.Round(60 * scale), (int)Math.Round(28 * scale));
+
             // pencil
-            btnDrawing.Size = new Size(60, 28);
+            btnDrawing.Size = btnSize;
             btnDrawing.FlatStyle = FlatStyle.Flat;
             btnDrawing.FlatAppearance.BorderSize = 1;
             btnDrawing.BackgroundImage = Properties.Resources.pencil;
@@ -183,7 +205,7 @@ namespace Pulsar.Server.Forms
             toolTipButtons.SetToolTip(btnDrawing, "启用画笔");
 
             // eraser
-            btnEraser.Size = new Size(60, 28);
+            btnEraser.Size = btnSize;
             btnEraser.FlatStyle = FlatStyle.Flat;
             btnEraser.FlatAppearance.BorderSize = 1;
             btnEraser.BackgroundImage = Properties.Resources.eraser;
@@ -194,7 +216,7 @@ namespace Pulsar.Server.Forms
             toolTipButtons.SetToolTip(btnEraser, "启用橡皮擦");
 
             // clear
-            btnClearDrawing.Size = new Size(60, 28);
+            btnClearDrawing.Size = btnSize;
             btnClearDrawing.FlatStyle = FlatStyle.Flat;
             btnClearDrawing.FlatAppearance.BorderSize = 1;
             btnClearDrawing.BackgroundImage = Properties.Resources.clear;
@@ -309,7 +331,7 @@ namespace Pulsar.Server.Forms
             if (panelDrawingTools.Visible)
             {
                 panelDrawingTools.Visible = false;
-                btnShowDrawingTools.Image = Properties.Resources.arrow_up;
+                DpiImageScaling.SetScaledButtonIcon(btnShowDrawingTools, Properties.Resources.arrow_up, _dpiScale);
                 toolTipButtons.SetToolTip(btnShowDrawingTools, "显示绘图工具");
             }
 
@@ -385,7 +407,7 @@ namespace Pulsar.Server.Forms
             OnResize(EventArgs.Empty); // trigger resize event to align controls
 
             panelDrawingTools.Visible = false;
-            btnShowDrawingTools.Image = Properties.Resources.arrow_up;
+            DpiImageScaling.SetScaledButtonIcon(btnShowDrawingTools, Properties.Resources.arrow_up, _dpiScale);
             toolTipButtons.SetToolTip(btnShowDrawingTools, "显示绘图工具");
 
             _enableDrawingMode = false;
@@ -602,15 +624,15 @@ namespace Pulsar.Server.Forms
             if (_enableMouseInput)
             {
                 this.picDesktop.Cursor = Cursors.Default;
-                btnMouse.Image = Properties.Resources.mouse_delete;
+                DpiImageScaling.SetScaledButtonIcon(btnMouse, Properties.Resources.mouse_delete, _dpiScale);
                 toolTipButtons.SetToolTip(btnMouse, "启用鼠标输入。");
                 _enableMouseInput = false;
             }
             else
             {
                 this.picDesktop.Cursor = Cursors.Hand;
-                btnMouse.Image = Properties.Resources.mouse_add;
-                toolTipButtons.SetToolTip(btnMouse, "Disable mouse input.");
+                DpiImageScaling.SetScaledButtonIcon(btnMouse, Properties.Resources.mouse_add, _dpiScale);
+                toolTipButtons.SetToolTip(btnMouse, "禁用鼠标输入。");
                 _enableMouseInput = true;
             }
 
@@ -623,14 +645,14 @@ namespace Pulsar.Server.Forms
             if (_enableKeyboardInput)
             {
                 this.picDesktop.Cursor = Cursors.Default;
-                btnKeyboard.Image = Properties.Resources.keyboard_delete;
+                DpiImageScaling.SetScaledButtonIcon(btnKeyboard, Properties.Resources.keyboard_delete, _dpiScale);
                 toolTipButtons.SetToolTip(btnKeyboard, "启用键盘输入。");
                 _enableKeyboardInput = false;
             }
             else
             {
                 this.picDesktop.Cursor = Cursors.Hand;
-                btnKeyboard.Image = Properties.Resources.keyboard_add;
+                DpiImageScaling.SetScaledButtonIcon(btnKeyboard, Properties.Resources.keyboard_add, _dpiScale);
                 toolTipButtons.SetToolTip(btnKeyboard, "禁用键盘输入。");
                 _enableKeyboardInput = true;
             }
@@ -644,12 +666,12 @@ namespace Pulsar.Server.Forms
             _useGPU = !_useGPU;
             if (_useGPU)
             {
-                enableGPU.Image = Properties.Resources.computer_go; // enable GPU
+                DpiImageScaling.SetScaledButtonIcon(enableGPU, Properties.Resources.computer_go, _dpiScale); // enable GPU
                 toolTipButtons.SetToolTip(enableGPU, "禁用 GPU。");
             }
             else
             {
-                enableGPU.Image = Properties.Resources.computer_error; // disable GPU
+                DpiImageScaling.SetScaledButtonIcon(enableGPU, Properties.Resources.computer_error, _dpiScale); // disable GPU
                 toolTipButtons.SetToolTip(enableGPU, "启用 GPU。");
             }
             UpdateInputButtonsVisualState();
@@ -734,9 +756,8 @@ namespace Pulsar.Server.Forms
             }
 
             panelDrawingTools.Visible = visible;
-            btnShowDrawingTools.Image = visible ?
-                Properties.Resources.arrow_down :
-                Properties.Resources.arrow_up;
+            DpiImageScaling.SetScaledButtonIcon(btnShowDrawingTools,
+                visible ? Properties.Resources.arrow_down : Properties.Resources.arrow_up, _dpiScale);
             toolTipButtons.SetToolTip(btnShowDrawingTools,
                 visible ? "隐藏绘图工具" : "显示绘图工具");
             this.ActiveControl = picDesktop;

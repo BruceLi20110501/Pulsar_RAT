@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Forms.DarkMode;
+using Pulsar.Server.Forms.DarkMode;
 using Pulsar.Server.Helper;
 using System;
 using System.ComponentModel;
@@ -35,10 +35,10 @@ namespace Pulsar.Server.Forms
             this.Text = WindowHelper.GetWindowTitle("显示消息框", _selectedClients);
 
             cmbMsgButtons.Items.AddRange(new string[]
-            {"AbortRetryIgnore", "OK", "OKCancel", "RetryCancel", "YesNo", "YesNoCancel"});
+            {"中止/重试/忽略", "确定", "确定/取消", "重试/取消", "是/否", "是/否/取消"});
             cmbMsgButtons.SelectedIndex = 0;
             cmbMsgIcon.Items.AddRange(new string[]
-            {"None", "Error", "Hand", "Question", "Exclamation", "Warning", "Information", "Asterisk"});
+            {"无", "错误", "停止", "问号", "感叹号", "警告", "信息", "星号"});
             cmbMsgIcon.SelectedIndex = 0;
         }
 

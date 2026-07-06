@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Controls;
+using Pulsar.Server.Controls;
 
 namespace Pulsar.Server.Forms
 {
@@ -605,9 +605,9 @@ namespace Pulsar.Server.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Controls.Add(this.tableLayoutPanel);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "FrmRegistryEditor";

@@ -100,7 +100,7 @@ namespace Pulsar.Server.Forms
             lblQualityShow.Name = "lblQualityShow";
             lblQualityShow.Size = new System.Drawing.Size(56, 13);
             lblQualityShow.TabIndex = 5;
-            lblQualityShow.Text = "100 (best)";
+            lblQualityShow.Text = "100 (最佳)";
             // 
             // panelTop
             // 

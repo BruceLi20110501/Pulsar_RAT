@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Pulsar.Server.Forms.DarkMode;
 using Pulsar.Server.Networking;
 
 namespace Pulsar.Server.Forms
@@ -25,55 +26,56 @@ namespace Pulsar.Server.Forms
             _client = client ?? throw new ArgumentNullException(nameof(client));
             InitializeComponent();
             InitializeCustomComponents();
+            DarkModeManager.ApplyDarkMode(this);
         }
 
         private void InitializeCustomComponents()
         {
-            // Initialize UI Components
+            this.SuspendLayout();
+
+            this.AutoScaleDimensions = new SizeF(96F, 96F);
+            this.AutoScaleMode = AutoScaleMode.Dpi;
+            this.Font = new Font("Segoe UI", 9F);
+
             this.lblNickname = new Label
             {
                 AutoSize = true,
-                Location = new Point(12, 15),
-                Name = "lblNickname",
-                Size = new Size(58, 13),
+                Location = new Point(16, 12),
                 TabIndex = 0,
-                Text = "Nickname:"
+                Text = "昵称："
             };
 
             this.txtNickname = new TextBox
             {
-                Location = new Point(76, 12),
-                Name = "txtNickname",
-                Size = new Size(196, 20),
+                Location = new Point(16, 36),
+                Size = new Size(388, 23),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
                 TabIndex = 1
             };
 
             this.btnOk = new Button
             {
-                Location = new Point(116, 38),
-                Name = "btnOk",
-                Size = new Size(75, 23),
+                Location = new Point(220, 72),
+                Size = new Size(88, 30),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Right,
                 TabIndex = 2,
-                Text = "OK",
+                Text = "确定",
                 UseVisualStyleBackColor = true
             };
             this.btnOk.Click += BtnOk_Click;
 
             this.btnCancel = new Button
             {
-                Location = new Point(197, 38),
-                Name = "btnCancel",
-                Size = new Size(75, 23),
+                Location = new Point(316, 72),
+                Size = new Size(88, 30),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Right,
                 TabIndex = 3,
-                Text = "Cancel",
+                Text = "取消",
                 UseVisualStyleBackColor = true
             };
             this.btnCancel.Click += BtnCancel_Click;
 
-            // Form Settings
-            this.AutoScaleDimensions = new SizeF(6F, 13F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(284, 71);
+            this.ClientSize = new Size(420, 116);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtNickname);
@@ -83,21 +85,24 @@ namespace Pulsar.Server.Forms
             this.MinimizeBox = false;
             this.Name = "FrmNickname";
             this.StartPosition = FormStartPosition.CenterParent;
-            this.Text = "Nickname";
+            this.Text = "昵称设置";
             this.Load += FrmNickname_Load;
+
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         private void BtnOk_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNickname.Text))
             {
-                ShowErrorMessage("Please enter a valid nickname.");
+                ShowErrorMessage("请输入有效的昵称。");
                 return;
             }
 
             if (_client?.Value == null)
             {
-                ShowErrorMessage("Client information is not available.");
+                ShowErrorMessage("客户端信息不可用。");
                 return;
             }
 
@@ -114,12 +119,12 @@ namespace Pulsar.Server.Forms
 
                 OnNicknameSaved(EventArgs.Empty); // Trigger event  
 
-                ShowSuccessMessage("Nickname saved successfully!");
+                ShowSuccessMessage("昵称保存成功！");
                 this.Close(); // Close the form after saving the nickname  
             }
             catch (Exception ex)
             {
-                ShowErrorMessage($"An error occurred while saving the nickname: {ex.Message}");
+                ShowErrorMessage($"保存昵称时出错：{ex.Message}");
             }
         }
 
@@ -167,19 +172,19 @@ namespace Pulsar.Server.Forms
             }
             catch (Exception ex)
             {
-                ShowErrorMessage($"Failed to save or update client info: {ex.Message}");
+                ShowErrorMessage($"保存客户端信息失败：{ex.Message}");
                 throw;
             }
         }
 
         private void ShowErrorMessage(string message)
         {
-            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ShowSuccessMessage(string message)
         {
-            MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(message, "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnCancel_Click(object sender, EventArgs e) => this.Close();

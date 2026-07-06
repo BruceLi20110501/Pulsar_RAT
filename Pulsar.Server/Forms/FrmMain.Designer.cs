@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Controls;
+using Pulsar.Server.Controls;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -186,7 +186,7 @@ namespace Pulsar.Server.Forms
             DebugLogRichBox = new RichTextBox();
             DebugContextMenuStrip = new ContextMenuStrip(components);
             saveLogsToolStripMenuItem = new ToolStripMenuItem();
-            saveSlectedToolStripMenuItem = new ToolStripMenuItem();
+            saveSelectedToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             clearLogsToolStripMenuItem = new ToolStripMenuItem();
             splitter1 = new Splitter();
@@ -1153,7 +1153,7 @@ namespace Pulsar.Server.Forms
             // notifyIcon
             // 
             notifyIcon.Icon = (Icon)resources.GetObject("notifyIcon.Icon");
-            notifyIcon.Text = "Pulsar";
+            notifyIcon.Text = "Pulsar STNull";
             notifyIcon.Visible = true;
             notifyIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
             // 
@@ -1605,7 +1605,7 @@ namespace Pulsar.Server.Forms
             // 
             // DebugContextMenuStrip
             // 
-            DebugContextMenuStrip.Items.AddRange(new ToolStripItem[] { saveLogsToolStripMenuItem, saveSlectedToolStripMenuItem, toolStripSeparator1, clearLogsToolStripMenuItem });
+            DebugContextMenuStrip.Items.AddRange(new ToolStripItem[] { saveLogsToolStripMenuItem, saveSelectedToolStripMenuItem, toolStripSeparator1, clearLogsToolStripMenuItem });
             DebugContextMenuStrip.Name = "DebugContextMenuStrip";
             DebugContextMenuStrip.Size = new Size(157, 76);
             // 
@@ -1616,12 +1616,12 @@ namespace Pulsar.Server.Forms
             saveLogsToolStripMenuItem.Text = "保存日志";
             saveLogsToolStripMenuItem.Click += saveLogsToolStripMenuItem_Click;
             // 
-            // saveSlectedToolStripMenuItem
+            // saveSelectedToolStripMenuItem
             // 
-            saveSlectedToolStripMenuItem.Name = "saveSlectedToolStripMenuItem";
-            saveSlectedToolStripMenuItem.Size = new Size(156, 22);
-            saveSlectedToolStripMenuItem.Text = "保存选中项";
-            saveSlectedToolStripMenuItem.Click += saveSlectedToolStripMenuItem_Click;
+            saveSelectedToolStripMenuItem.Name = "saveSelectedToolStripMenuItem";
+            saveSelectedToolStripMenuItem.Size = new Size(156, 22);
+            saveSelectedToolStripMenuItem.Text = "保存选中项";
+            saveSelectedToolStripMenuItem.Click += saveSelectedToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
@@ -2156,7 +2156,7 @@ namespace Pulsar.Server.Forms
             mapToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             mapToolStripMenuItem.Name = "mapToolStripMenuItem";
             mapToolStripMenuItem.Size = new Size(59, 21);
-            mapToolStripMenuItem.Text = "地图";
+            mapToolStripMenuItem.Text = "热力图";
             mapToolStripMenuItem.Click += mapToolStripMenuItem_Click;
             // 
             // autoTasksToolStripMenuItem
@@ -2231,7 +2231,7 @@ namespace Pulsar.Server.Forms
             MinimumSize = new Size(680, 415);
             Name = "FrmMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Pulsar Premium - 已连接：0";
+            Text = "Pulsar STNull - 已连接：0";
             FormClosing += FrmMain_FormClosing;
             Load += FrmMain_Load;
             contextMenuStrip.ResumeLayout(false);
@@ -2335,7 +2335,7 @@ namespace Pulsar.Server.Forms
         private ToolStripMenuItem cryptoClipperToolStripMenuItem;
         private ContextMenuStrip DebugContextMenuStrip;
         private ToolStripMenuItem saveLogsToolStripMenuItem;
-        private ToolStripMenuItem saveSlectedToolStripMenuItem;
+        private ToolStripMenuItem saveSelectedToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem clearLogsToolStripMenuItem;
         private ToolStripMenuItem nicknameToolStripMenuItem;

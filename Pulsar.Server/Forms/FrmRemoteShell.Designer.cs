@@ -1,4 +1,4 @@
-﻿namespace Pulsar.Server.Forms
+namespace Pulsar.Server.Forms
 {
     partial class FrmRemoteShell
     {
@@ -87,6 +87,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             ClientSize = new System.Drawing.Size(637, 323);
+            MinimumSize = new System.Drawing.Size(400, 250);
             Controls.Add(tableLayoutPanel);
             Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");

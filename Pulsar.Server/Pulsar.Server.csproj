@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	
+<Project Sdk="Microsoft.NET.Sdk">	
 	<PropertyGroup>
 		<TargetFramework>net9.0-windows</TargetFramework>
 		<OutputType>WinExe</OutputType>
@@ -10,6 +10,7 @@
 		<StartupObject>Pulsar.Server.Program</StartupObject>
 		<ApplicationIcon>Images\Icons\Pulsar_Server.ico</ApplicationIcon>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
 		<DonutDir>$(MSBuildProjectDirectory)\..\external\donut</DonutDir>
 		<CustomResourceTypesSupport>true</CustomResourceTypesSupport>
 		<EnableWindowsTargeting>true</EnableWindowsTargeting>
@@ -79,6 +80,9 @@
 		<PackageReference Include="LiveChartsCore" Version="2.0.0-rc6.1" />
 		<PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.0.0-rc6.1" />
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc6.1" />
+		<PackageReference Include="SkiaSharp" Version="3.119.0" />
+		<PackageReference Include="SkiaSharp.Views.WPF" Version="3.119.0" />
+		<PackageReference Include="HarfBuzzSharp" Version="8.3.1.1" />
 		<PackageReference Include="Costura.Fody" Version="5.8.0" PrivateAssets="all" />
 	</ItemGroup>
 	<ItemGroup>

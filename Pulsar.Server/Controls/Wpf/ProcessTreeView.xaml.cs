@@ -439,7 +439,7 @@ namespace Pulsar.Server.Controls.Wpf
         public Process Model { get; }
         public ObservableCollection<ProcessTreeNode> Children { get; }
         public bool IsRatProcess { get; }
-        public string Name => string.IsNullOrWhiteSpace(Model.Name) ? "(unknown)" : Model.Name;
+        public string Name => string.IsNullOrWhiteSpace(Model.Name) ? "(未知)" : Model.Name;
         public string PidDisplay => Model.Id.ToString();
         public string WindowTitle => string.IsNullOrWhiteSpace(Model.MainWindowTitle) ? string.Empty : Model.MainWindowTitle;
 

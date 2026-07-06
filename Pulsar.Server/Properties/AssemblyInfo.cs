@@ -1,16 +1,16 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
-[assembly: AssemblyTitle("Pulsar Server")]
+[assembly: AssemblyTitle("Pulsar STNull Server")]
 [assembly: AssemblyDescription("Remote Administration Tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Pulsar")]
-[assembly: AssemblyCopyright("Copyright © PulsarTeam 2025")]
+[assembly: AssemblyProduct("Pulsar STNull")]
+[assembly: AssemblyCopyright("Copyright © STNull 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: InternalsVisibleTo("Server.Tests")]

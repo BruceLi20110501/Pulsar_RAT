@@ -1,5 +1,6 @@
-﻿using DarkModeForms;
+using DarkModeForms;
 using Pulsar.Server.Models;
+using Pulsar.Server.Utilities;
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -29,6 +30,10 @@ namespace Pulsar.Server.Forms.DarkMode
 
             Color borderColor = isDarkModeChecked ? Color.DimGray : Color.DimGray;
             SetBorderColor(form, borderColor);
+
+            // 统一 DPI 图标适配：覆盖该窗体控件树里的 ToolStrip / 右键菜单 / ListView 的 ImageList。
+            // 幂等，可安全对所有窗体调用。
+            DpiImageScaling.ApplyToForm(form);
         }
 
         private static void SetBorderColor(Form form, Color color)

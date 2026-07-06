@@ -1,4 +1,4 @@
-﻿namespace Pulsar.Server.Forms
+namespace Pulsar.Server.Forms
 {
     partial class FrmShowMessagebox
     {
@@ -130,7 +130,7 @@
             this.lblCaption.Name = "lblCaption";
             this.lblCaption.Size = new System.Drawing.Size(51, 13);
             this.lblCaption.TabIndex = 1;
-            this.lblCaption.Text = "Caption:";
+            this.lblCaption.Text = "标题：";
             // 
             // btnPreview
             // 

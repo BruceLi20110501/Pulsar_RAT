@@ -10,7 +10,7 @@ namespace Pulsar.Server.Forms
     {
         private readonly RegValueData _value;
 
-        private const string INVALID_BINARY_ERROR = "The binary value was invalid and could not be converted correctly.";
+        private const string INVALID_BINARY_ERROR = "二进制值无效，无法正确转换。";
 
         public FrmRegValueEditBinary(RegValueData value)
         {
@@ -38,7 +38,7 @@ namespace Pulsar.Server.Forms
                 }
                 catch
                 {
-                    ShowWarning(INVALID_BINARY_ERROR, "Warning");
+                    ShowWarning(INVALID_BINARY_ERROR, "警告");
                     this.DialogResult = DialogResult.None;
                 }
             }

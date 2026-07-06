@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Pulsar.Server.Forms.DarkMode;
 
 namespace Pulsar.Server.Controls
 {
@@ -11,39 +12,52 @@ namespace Pulsar.Server.Controls
             DialogResult dialogResult = DialogResult.Cancel;
             using (var form = new Form())
             {
-                Label label = new Label();
-                TextBox textBox = new TextBox();
-                Button buttonOk = new Button();
-                Button buttonCancel = new Button();
+                form.SuspendLayout();
 
+                form.AutoScaleDimensions = new SizeF(96F, 96F);
+                form.AutoScaleMode = AutoScaleMode.Dpi;
+                form.Font = new Font("Segoe UI", 9F);
                 form.Text = title;
+
+                var label = new Label();
+                var textBox = new TextBox();
+                var buttonOk = new Button();
+                var buttonCancel = new Button();
+
                 label.Text = promptText;
-                textBox.Text = value;
-
-                buttonOk.Text = "OK";
-                buttonCancel.Text = "Cancel";
-                buttonOk.DialogResult = DialogResult.OK;
-                buttonCancel.DialogResult = DialogResult.Cancel;
-
-                label.SetBounds(9, 20, 372, 13);
-                textBox.SetBounds(12, 36, 372, 20);
-                buttonOk.SetBounds(228, 72, 75, 23);
-                buttonCancel.SetBounds(309, 72, 75, 23);
-
                 label.AutoSize = true;
-                textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+                label.Location = new Point(16, 12);
+
+                textBox.Text = value;
+                textBox.Location = new Point(16, 36);
+                textBox.Size = new Size(388, 23);
+                textBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
+                buttonOk.Text = "确定";
+                buttonOk.DialogResult = DialogResult.OK;
+                buttonOk.Location = new Point(220, 72);
+                buttonOk.Size = new Size(88, 30);
                 buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+                buttonCancel.Text = "取消";
+                buttonCancel.DialogResult = DialogResult.Cancel;
+                buttonCancel.Location = new Point(316, 72);
+                buttonCancel.Size = new Size(88, 30);
                 buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
-                form.ClientSize = new Size(396, 107);
+                form.ClientSize = new Size(420, 116);
                 form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
-                form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
                 form.FormBorderStyle = FormBorderStyle.FixedDialog;
-                form.StartPosition = FormStartPosition.CenterScreen;
+                form.StartPosition = FormStartPosition.CenterParent;
                 form.MinimizeBox = false;
                 form.MaximizeBox = false;
                 form.AcceptButton = buttonOk;
                 form.CancelButton = buttonCancel;
+
+                form.ResumeLayout(false);
+                form.PerformLayout();
+
+                DarkModeManager.ApplyDarkMode(form);
 
                 dialogResult = form.ShowDialog();
                 value = textBox.Text;

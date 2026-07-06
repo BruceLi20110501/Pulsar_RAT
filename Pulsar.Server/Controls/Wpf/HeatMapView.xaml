@@ -5,28 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              d:DesignWidth="900"
-             d:DesignHeight="620">
+             d:DesignHeight="700">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <SolidColorBrush x:Key="StatsBackgroundBrush" Color="#FFFFFFFF" />
-        <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FFF5F5F5" />
-        <SolidColorBrush x:Key="CardBorderBrush" Color="#FFE0E0E0" />
-        <SolidColorBrush x:Key="CardForegroundBrush" Color="#FF1F1F1F" />
-        <SolidColorBrush x:Key="SectionHeaderBrush" Color="#FF1F1F1F" />
-        <SolidColorBrush x:Key="MutedTextBrush" Color="#FF5F6368" />
-        <SolidColorBrush x:Key="AccentBrush" Color="#FF1976D2" />
-        <SolidColorBrush x:Key="PositiveAccentBrush" Color="#FF2E7D32" />
-        <SolidColorBrush x:Key="NegativeAccentBrush" Color="#FFC62828" />
-        <SolidColorBrush x:Key="ChartBackgroundBrush" Color="#FFFFFFFF" />
-        <SolidColorBrush x:Key="ChartBorderBrush" Color="#FFE0E0E0" />
-        <SolidColorBrush x:Key="ScrollBarTrackBrush" Color="#FFE5E5E5" />
-        <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="#FFB5B5B5" />
-        <SolidColorBrush x:Key="ScrollBarThumbHoverBrush" Color="#FF9E9E9E" />
-        <SolidColorBrush x:Key="ScrollBarThumbPressedBrush" Color="#FF7C7C7C" />
-        <Style x:Key="RightAlignedCell" TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
+
+        <SolidColorBrush x:Key="StatsBackgroundBrush" Color="#FF000000" />
+        <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FF111111" />
+        <SolidColorBrush x:Key="CardBorderBrush" Color="#FF222222" />
+        <SolidColorBrush x:Key="CardForegroundBrush" Color="#FFE5E7EB" />
+        <SolidColorBrush x:Key="SectionHeaderBrush" Color="#FFF1F5F9" />
+        <SolidColorBrush x:Key="MutedTextBrush" Color="#FF8B92A5" />
+        <SolidColorBrush x:Key="AccentBrush" Color="#FF60A5FA" />
+        <SolidColorBrush x:Key="PositiveAccentBrush" Color="#FF34D399" />
+        <SolidColorBrush x:Key="NegativeAccentBrush" Color="#FFF87171" />
+        <SolidColorBrush x:Key="ChartBackgroundBrush" Color="#FF111111" />
+        <SolidColorBrush x:Key="ChartBorderBrush" Color="#FF222222" />
+        <SolidColorBrush x:Key="ScrollBarTrackBrush" Color="#FF0A0A0A" />
+        <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="#FF333333" />
+        <SolidColorBrush x:Key="ScrollBarThumbHoverBrush" Color="#FF4A4A4A" />
+        <SolidColorBrush x:Key="ScrollBarThumbPressedBrush" Color="#FF666666" />
+        <SolidColorBrush x:Key="TableRowAltBrush" Color="#FF0D0D0D" />
+        <SolidColorBrush x:Key="TableRowHoverBrush" Color="#FF1A1A1A" />
+        <SolidColorBrush x:Key="TableHeaderBgBrush" Color="#FF0A0A0A" />
+        <Color x:Key="ShadowColor">#40000000</Color>
+
         <Style x:Key="SlimScrollBarThumbStyle" TargetType="Thumb">
             <Setter Property="Background" Value="{DynamicResource ScrollBarThumbBrush}" />
             <Setter Property="Template">
@@ -52,34 +54,9 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="0" />
                 </Grid.RowDefinitions>
-                <Track x:Name="PART_Track"
-                       Grid.Row="1"
-                       IsDirectionReversed="True"
-                       Orientation="Vertical"
-                       Maximum="{TemplateBinding Maximum}"
-                       Minimum="{TemplateBinding Minimum}"
-                       Value="{TemplateBinding Value}"
-                       ViewportSize="{TemplateBinding ViewportSize}">
-                    <Track.Thumb>
-                        <Thumb Style="{StaticResource SlimScrollBarThumbStyle}" />
-                    </Track.Thumb>
-                </Track>
-            </Grid>
-        </ControlTemplate>
-        <ControlTemplate x:Key="SlimHorizontalScrollBarTemplate" TargetType="ScrollBar">
-            <Grid Background="{TemplateBinding Background}" Height="{TemplateBinding Height}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="0" />
-                </Grid.ColumnDefinitions>
-                <Track x:Name="PART_Track"
-                       Grid.Column="1"
-                       Orientation="Horizontal"
-                       Maximum="{TemplateBinding Maximum}"
-                       Minimum="{TemplateBinding Minimum}"
-                       Value="{TemplateBinding Value}"
-                       ViewportSize="{TemplateBinding ViewportSize}">
+                <Track x:Name="PART_Track" Grid.Row="1" IsDirectionReversed="True" Orientation="Vertical"
+                       Maximum="{TemplateBinding Maximum}" Minimum="{TemplateBinding Minimum}"
+                       Value="{TemplateBinding Value}" ViewportSize="{TemplateBinding ViewportSize}">
                     <Track.Thumb>
                         <Thumb Style="{StaticResource SlimScrollBarThumbStyle}" />
                     </Track.Thumb>
@@ -88,19 +65,68 @@
         </ControlTemplate>
         <Style x:Key="SlimScrollBarStyle" TargetType="ScrollBar">
             <Setter Property="Background" Value="{DynamicResource ScrollBarTrackBrush}" />
-            <Setter Property="Width" Value="10" />
+            <Setter Property="Width" Value="8" />
             <Setter Property="Template" Value="{StaticResource SlimVerticalScrollBarTemplate}" />
-            <Style.Triggers>
-                <Trigger Property="Orientation" Value="Horizontal">
-                    <Setter Property="Height" Value="10" />
-                    <Setter Property="Width" Value="Auto" />
-                    <Setter Property="Template" Value="{StaticResource SlimHorizontalScrollBarTemplate}" />
-                </Trigger>
-            </Style.Triggers>
+        </Style>
+
+        <!-- ListView item style with alternating rows and hover -->
+        <Style x:Key="CountryListItemStyle" TargetType="ListViewItem">
+            <Setter Property="Padding" Value="4,6" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource CardForegroundBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border x:Name="Bd" Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="{DynamicResource CardBorderBrush}">
+                            <GridViewRowPresenter Content="{TemplateBinding Content}"
+                                                  Columns="{Binding Path=View.Columns, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource TableRowHoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource TableRowAltBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- GridViewColumnHeader style -->
+        <Style x:Key="TableHeaderStyle" TargetType="GridViewColumnHeader">
+            <Setter Property="Background" Value="{DynamicResource TableHeaderBgBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource MutedTextBrush}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="8,8,8,8" />
+            <Setter Property="BorderThickness" Value="0,0,0,2" />
+            <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewColumnHeader">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource StatsBackgroundBrush}">
+
+        <!-- Main content -->
         <ScrollViewer VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
                       Background="Transparent"
@@ -108,159 +134,186 @@
             <ScrollViewer.Resources>
                 <Style TargetType="ScrollBar" BasedOn="{StaticResource SlimScrollBarStyle}" />
             </ScrollViewer.Resources>
-            <StackPanel Margin="24">
-                <TextBlock Text="全球分布"
-                           FontSize="20"
-                           FontWeight="SemiBold"
+            <StackPanel Margin="28,24,28,24">
+
+                <!-- Section header -->
+                <TextBlock Text="全球分布" Margin="0,0,0,20"
+                           FontSize="22" FontWeight="Bold"
                            Foreground="{StaticResource SectionHeaderBrush}" />
 
-                <ItemsControl ItemsSource="{Binding StatCards}" Margin="0,16,0,24">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="2" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border Margin="8"
-                                    Padding="16"
-                                    CornerRadius="12"
-                                    Background="{StaticResource CardBackgroundBrush}"
-                                    BorderBrush="{StaticResource CardBorderBrush}"
-                                    BorderThickness="1">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Title}"
-                                               FontSize="14"
-                                               FontWeight="SemiBold"
-                                               Foreground="{StaticResource CardForegroundBrush}" />
-                                    <TextBlock Text="{Binding Value}"
-                                               FontSize="28"
-                                               FontWeight="Bold"
-                                               Margin="0,8,0,4"
-                                               Foreground="{StaticResource AccentBrush}" />
-                                    <TextBlock Text="{Binding Subtitle}"
-                                               FontSize="12"
-                                               Foreground="{StaticResource MutedTextBrush}"
-                                               Opacity="0.7" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-                <Grid Margin="0,0,0,24">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Border Grid.Column="0"
-                            Margin="0,0,12,0"
-                            Padding="16"
-                            CornerRadius="12"
+                <!-- Stat cards - 4 columns -->
+                <UniformGrid Columns="4" Margin="0,0,0,28">
+                    <Border Margin="0,0,10,0" CornerRadius="10"
                             Background="{StaticResource CardBackgroundBrush}"
-                            BorderBrush="{StaticResource CardBorderBrush}"
-                            BorderThickness="1">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,12">
-                                <TextBlock Text="全球热力图"
-                                           FontSize="16"
-                                           FontWeight="SemiBold"
-                                           Foreground="{StaticResource SectionHeaderBrush}" />
-                                <TextBlock Text="— 客户端按国家分布"
-                                           FontSize="13"
-                                           Margin="8,2,0,0"
-                                           Foreground="{StaticResource MutedTextBrush}"
-                                           Opacity="0.7" />
-                            </StackPanel>
-                            <ContentControl x:Name="MapHost"
-                                            Height="360"
-                                            HorizontalContentAlignment="Stretch"
-                                            VerticalContentAlignment="Stretch" />
-                            <TextBlock Text="颜色越热的区域表示连接的客户端越多。"
-                                       Margin="0,12,0,0"
-                                       FontSize="12"
+                            BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="12" Opacity="0.08" Direction="270" Color="{StaticResource ShadowColor}" />
+                        </Border.Effect>
+                        <StackPanel Margin="16,16,16,16">
+                            <TextBlock Text="{Binding StatCards[0].Title}" FontSize="12" FontWeight="Medium"
                                        Foreground="{StaticResource MutedTextBrush}" />
+                            <TextBlock Text="{Binding StatCards[0].Value}" FontSize="32" FontWeight="Bold"
+                                       Margin="0,6,0,4" Foreground="{StaticResource CardForegroundBrush}" />
+                            <TextBlock Text="{Binding StatCards[0].Subtitle}" FontSize="11"
+                                       Foreground="{StaticResource MutedTextBrush}" Opacity="0.8" />
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="1"
-                            Padding="16"
-                            CornerRadius="12"
+                    <Border Margin="6,0,6,0" CornerRadius="10"
                             Background="{StaticResource CardBackgroundBrush}"
-                            BorderBrush="{StaticResource CardBorderBrush}"
-                            BorderThickness="1">
+                            BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="12" Opacity="0.08" Direction="270" Color="{StaticResource ShadowColor}" />
+                        </Border.Effect>
+                        <StackPanel Margin="16,16,16,16">
+                            <TextBlock Text="{Binding StatCards[1].Title}" FontSize="12" FontWeight="Medium"
+                                       Foreground="{StaticResource MutedTextBrush}" />
+                            <TextBlock Text="{Binding StatCards[1].Value}" FontSize="32" FontWeight="Bold"
+                                       Margin="0,6,0,4" Foreground="{StaticResource CardForegroundBrush}" />
+                            <TextBlock Text="{Binding StatCards[1].Subtitle}" FontSize="11"
+                                       Foreground="{StaticResource MutedTextBrush}" Opacity="0.8" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Margin="6,0,6,0" CornerRadius="10"
+                            Background="{StaticResource CardBackgroundBrush}"
+                            BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="12" Opacity="0.08" Direction="270" Color="{StaticResource ShadowColor}" />
+                        </Border.Effect>
+                        <StackPanel Margin="16,16,16,16">
+                            <TextBlock Text="{Binding StatCards[2].Title}" FontSize="12" FontWeight="Medium"
+                                       Foreground="{StaticResource MutedTextBrush}" />
+                            <TextBlock Text="{Binding StatCards[2].Value}" FontSize="32" FontWeight="Bold"
+                                       Margin="0,6,0,4" Foreground="{StaticResource CardForegroundBrush}" />
+                            <TextBlock Text="{Binding StatCards[2].Subtitle}" FontSize="11"
+                                       Foreground="{StaticResource MutedTextBrush}" Opacity="0.8" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Margin="10,0,0,0" CornerRadius="10"
+                            Background="{StaticResource CardBackgroundBrush}"
+                            BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="12" Opacity="0.08" Direction="270" Color="{StaticResource ShadowColor}" />
+                        </Border.Effect>
+                        <StackPanel Margin="16,16,16,16">
+                            <TextBlock Text="{Binding StatCards[3].Title}" FontSize="12" FontWeight="Medium"
+                                       Foreground="{StaticResource MutedTextBrush}" />
+                            <TextBlock Text="{Binding StatCards[3].Value}" FontSize="32" FontWeight="Bold"
+                                       Margin="0,6,0,4" Foreground="{StaticResource CardForegroundBrush}" />
+                            <TextBlock Text="{Binding StatCards[3].Subtitle}" FontSize="11"
+                                       Foreground="{StaticResource MutedTextBrush}" Opacity="0.8" />
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+
+                <!-- Map + Table row -->
+                <Grid Margin="0,0,0,28">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- GeoMap card -->
+                    <Border Grid.Column="0" Margin="0,0,12,0" Padding="20" CornerRadius="10"
+                            Background="{StaticResource CardBackgroundBrush}"
+                            BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="12" Opacity="0.08" Direction="270" Color="{StaticResource ShadowColor}" />
+                        </Border.Effect>
                         <StackPanel>
-                            <TextBlock Text="热门国家/地区"
-                                       FontSize="16"
-                                       FontWeight="SemiBold"
-                                       Foreground="{StaticResource SectionHeaderBrush}"
-                                       Margin="0,0,0,12" />
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                                <TextBlock Text="全球热力图" FontSize="15" FontWeight="SemiBold"
+                                           Foreground="{StaticResource SectionHeaderBrush}" VerticalAlignment="Center" />
+                                <TextBlock Text="— 客户端地理分布" FontSize="12" Margin="8,2,0,0"
+                                           Foreground="{StaticResource MutedTextBrush}" Opacity="0.7"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                            <ContentControl x:Name="MapHost" Height="380"
+                                            HorizontalContentAlignment="Stretch"
+                                            VerticalContentAlignment="Stretch" />
+                            <TextBlock Text="颜色越深表示该地区连接的客户端越多"
+                                       Margin="0,12,0,0" FontSize="11"
+                                       Foreground="{StaticResource MutedTextBrush}" Opacity="0.6" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Top countries table card -->
+                    <Border Grid.Column="1" Padding="20" CornerRadius="10"
+                            Background="{StaticResource CardBackgroundBrush}"
+                            BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="12" Opacity="0.08" Direction="270" Color="{StaticResource ShadowColor}" />
+                        </Border.Effect>
+                        <DockPanel>
+                            <TextBlock Text="热门国家/地区" DockPanel.Dock="Top" Margin="0,0,0,14"
+                                       FontSize="15" FontWeight="SemiBold"
+                                       Foreground="{StaticResource SectionHeaderBrush}" />
                             <ListView x:Name="TopCountriesList"
                                       ItemsSource="{Binding TopCountries}"
+                                      ItemContainerStyle="{StaticResource CountryListItemStyle}"
+                                      AlternationCount="2"
+                                      BorderThickness="1"
                                       BorderBrush="{StaticResource CardBorderBrush}"
-                                      BorderThickness="0"
                                       Background="Transparent"
                                       Foreground="{StaticResource CardForegroundBrush}"
-                                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                 <ListView.Resources>
                                     <Style TargetType="ScrollBar" BasedOn="{StaticResource SlimScrollBarStyle}" />
+                                    <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource TableHeaderStyle}" />
                                 </ListView.Resources>
                                 <ListView.View>
                                     <GridView AllowsColumnReorder="False">
-                                        <GridViewColumn Width="36" Header="#" DisplayMemberBinding="{Binding Rank}" />
-                                        <GridViewColumn Width="140" Header="国家/地区" DisplayMemberBinding="{Binding Country}" />
-                                        <GridViewColumn Width="60" Header="ISO" DisplayMemberBinding="{Binding Code}" />
-                                        <GridViewColumn Width="80" Header="客户端数" DisplayMemberBinding="{Binding Count}" />
-                                        <GridViewColumn Width="80" Header="占比" DisplayMemberBinding="{Binding SharePercent}" />
+                                        <GridViewColumn Width="32" Header="#" DisplayMemberBinding="{Binding Rank}" />
+                                        <GridViewColumn Width="130" Header="国家/地区" DisplayMemberBinding="{Binding Country}" />
+                                        <GridViewColumn Width="50" Header="ISO" DisplayMemberBinding="{Binding Code}" />
+                                        <GridViewColumn Width="60" Header="数量" DisplayMemberBinding="{Binding Count}" />
+                                        <GridViewColumn Width="60" Header="占比" DisplayMemberBinding="{Binding SharePercent}" />
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                        </StackPanel>
+                        </DockPanel>
                     </Border>
                 </Grid>
 
-                <TextBlock Text="{Binding LastUpdated}"
-                           Margin="0,16,0,0"
-                           FontSize="12"
-                           Foreground="{StaticResource MutedTextBrush}"
-                           Opacity="0.7" />
+                <!-- Footer -->
+                <TextBlock Text="{Binding LastUpdated}" Margin="0,4,0,0" FontSize="12"
+                           Foreground="{StaticResource MutedTextBrush}" Opacity="0.6" />
             </StackPanel>
         </ScrollViewer>
 
-        <Border Background="#AA000000"
+        <!-- Loading overlay -->
+        <Border Background="#CC1A1A2E"
                 Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="正在加载热力图..."
-                           Foreground="White"
-                           FontSize="18"
-                           FontWeight="SemiBold"
-                           TextAlignment="Center" />
+                <Border Width="48" Height="48" CornerRadius="24" Background="#333B82F6" Margin="0,0,0,16">
+                    <TextBlock Text="⟳" FontSize="24" Foreground="#FF3B82F6"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <TextBlock Text="正在加载热力图..." Foreground="#CCFFFFFF"
+                           FontSize="16" FontWeight="Medium" TextAlignment="Center" />
             </StackPanel>
         </Border>
 
-        <Border Background="#33FF0000"
+        <!-- Error overlay -->
+        <Border Background="#22EF4444"
                 Visibility="{Binding HasError, Converter={StaticResource BoolToVisibilityConverter}}">
             <Border Background="{StaticResource CardBackgroundBrush}"
-                    BorderBrush="{StaticResource CardBorderBrush}"
-                    BorderThickness="1"
-                    CornerRadius="12"
-                    Padding="24"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    MaxWidth="420">
+                    BorderBrush="{StaticResource NegativeAccentBrush}" BorderThickness="1"
+                    CornerRadius="12" Padding="32"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="420">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="4" BlurRadius="20" Opacity="0.15" Direction="270" />
+                </Border.Effect>
                 <StackPanel>
-                    <TextBlock Text="无法加载热力图"
-                               FontSize="18"
-                               FontWeight="SemiBold"
-                               Foreground="{StaticResource CardForegroundBrush}"
-                               TextAlignment="Center" />
-                    <TextBlock Text="{Binding ErrorMessage}"
-                               Margin="0,12,0,0"
-                               TextWrapping="Wrap"
-                               Foreground="{StaticResource CardForegroundBrush}"
-                               Opacity="0.8"
-                               TextAlignment="Center" />
+                    <TextBlock Text="⚠" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,12"
+                               Foreground="{StaticResource NegativeAccentBrush}" />
+                    <TextBlock Text="无法加载热力图" FontSize="18" FontWeight="SemiBold"
+                               Foreground="{StaticResource CardForegroundBrush}" TextAlignment="Center" />
+                    <TextBlock Text="{Binding ErrorMessage}" Margin="0,12,0,0" TextWrapping="Wrap"
+                               Foreground="{StaticResource MutedTextBrush}" TextAlignment="Center" />
                 </StackPanel>
             </Border>
         </Border>

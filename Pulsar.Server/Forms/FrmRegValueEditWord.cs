@@ -12,8 +12,8 @@ namespace Pulsar.Server.Forms
     {
         private readonly RegValueData _value;
 
-        private const string DWORD_WARNING = "The decimal value entered is greater than the maximum value of a DWORD (32-bit number). Should the value be truncated in order to continue?";
-        private const string QWORD_WARNING = "The decimal value entered is greater than the maximum value of a QWORD (64-bit number). Should the value be truncated in order to continue?";
+        private const string DWORD_WARNING = "输入的十进制值超出 DWORD（32 位）最大值，是否截断后继续？";
+        private const string QWORD_WARNING = "输入的十进制值超出 QWORD（64 位）最大值，是否截断后继续？";
 
         public FrmRegValueEditWord(RegValueData value)
         {
@@ -28,13 +28,13 @@ namespace Pulsar.Server.Forms
 
             if (value.Kind == RegistryValueKind.DWord)
             {
-                this.Text = "Edit DWORD (32-bit) Value";
+                this.Text = "编辑 DWORD (32 位) 值";
                 this.valueDataTxtBox.Type = WordType.DWORD;
                 this.valueDataTxtBox.Text = ByteConverter.ToUInt32(value.Data).ToString("x");
             }
             else
             {
-                this.Text = "Edit QWORD (64-bit) Value";
+                this.Text = "编辑 QWORD (64 位) 值";
                 this.valueDataTxtBox.Type = WordType.QWORD;
                 this.valueDataTxtBox.Text = ByteConverter.ToUInt64(value.Data).ToString("x");
             }
@@ -78,7 +78,7 @@ namespace Pulsar.Server.Forms
         {
             string message = _value.Kind == RegistryValueKind.DWord ? DWORD_WARNING : QWORD_WARNING;
 
-            return ShowWarning(message, "Overflow") == DialogResult.Yes;
+            return ShowWarning(message, "溢出") == DialogResult.Yes;
         }
     }
 }

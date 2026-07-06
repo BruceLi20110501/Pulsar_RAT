@@ -379,5 +379,10 @@ namespace Pulsar.Server.Plugins.TelegramTData
         }
 
         #endregion
+
+        private void lvwProcesses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

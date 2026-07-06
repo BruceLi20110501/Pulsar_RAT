@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Controls;
+using Pulsar.Server.Controls;
 
 namespace Pulsar.Server.Forms
 {
@@ -91,7 +91,7 @@ namespace Pulsar.Server.Forms
             downloadToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("downloadToolStripMenuItem.Image");
             downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
             downloadToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            downloadToolStripMenuItem.Text = "Download";
+            downloadToolStripMenuItem.Text = "下载";
             downloadToolStripMenuItem.Click += downloadToolStripMenuItem_Click;
             // 
             // uploadToolStripMenuItem
@@ -136,7 +136,7 @@ namespace Pulsar.Server.Forms
             deleteToolStripMenuItem.Image = Properties.Resources.delete;
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             deleteToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            deleteToolStripMenuItem.Text = "Delete";
+            deleteToolStripMenuItem.Text = "删除";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // line2ToolStripMenuItem
@@ -149,7 +149,7 @@ namespace Pulsar.Server.Forms
             addToStartupToolStripMenuItem.Image = Properties.Resources.application_add;
             addToStartupToolStripMenuItem.Name = "addToStartupToolStripMenuItem";
             addToStartupToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            addToStartupToolStripMenuItem.Text = "Add to Startup";
+            addToStartupToolStripMenuItem.Text = "添加到启动项";
             addToStartupToolStripMenuItem.Click += addToStartupToolStripMenuItem_Click;
             // 
             // line3ToolStripMenuItem
@@ -162,7 +162,7 @@ namespace Pulsar.Server.Forms
             refreshToolStripMenuItem.Image = Properties.Resources.refresh;
             refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             refreshToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            refreshToolStripMenuItem.Text = "Refresh";
+            refreshToolStripMenuItem.Text = "刷新";
             refreshToolStripMenuItem.Click += refreshToolStripMenuItem_Click;
             // 
             // openDirectoryInShellToolStripMenuItem
@@ -170,7 +170,7 @@ namespace Pulsar.Server.Forms
             openDirectoryInShellToolStripMenuItem.Image = Properties.Resources.terminal;
             openDirectoryInShellToolStripMenuItem.Name = "openDirectoryInShellToolStripMenuItem";
             openDirectoryInShellToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            openDirectoryInShellToolStripMenuItem.Text = "Open Directory in Remote Shell";
+            openDirectoryInShellToolStripMenuItem.Text = "在远程终端中打开目录";
             openDirectoryInShellToolStripMenuItem.Click += openDirectoryToolStripMenuItem_Click;
             // 
             // imgListDirectory
@@ -216,7 +216,7 @@ namespace Pulsar.Server.Forms
             cancelToolStripMenuItem.Image = Properties.Resources.cancel;
             cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
             cancelToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            cancelToolStripMenuItem.Text = "Cancel";
+            cancelToolStripMenuItem.Text = "取消";
             cancelToolStripMenuItem.Click += cancelToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
@@ -229,7 +229,7 @@ namespace Pulsar.Server.Forms
             clearToolStripMenuItem.Image = Properties.Resources.broom;
             clearToolStripMenuItem.Name = "clearToolStripMenuItem";
             clearToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            clearToolStripMenuItem.Text = "Clear transfers";
+            clearToolStripMenuItem.Text = "清除传输记录";
             clearToolStripMenuItem.Click += clearToolStripMenuItem_Click;
             // 
             // imgListTransfers
@@ -269,17 +269,18 @@ namespace Pulsar.Server.Forms
             tabFileExplorer.Padding = new System.Windows.Forms.Padding(3);
             tabFileExplorer.Size = new System.Drawing.Size(714, 448);
             tabFileExplorer.TabIndex = 0;
-            tabFileExplorer.Text = "File Explorer";
+            tabFileExplorer.Text = "文件浏览器";
             // 
             // btnRefresh
             // 
             btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnRefresh.FlatAppearance.BorderSize = 0;
             btnRefresh.Image = Properties.Resources.refresh;
-            btnRefresh.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            btnRefresh.Location = new System.Drawing.Point(682, 8);
+            btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            btnRefresh.Location = new System.Drawing.Point(680, 6);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new System.Drawing.Size(22, 22);
+            btnRefresh.Size = new System.Drawing.Size(28, 28);
             btnRefresh.TabIndex = 5;
             btnRefresh.UseVisualStyleBackColor = true;
             btnRefresh.Click += btnRefresh_Click;
@@ -289,18 +290,17 @@ namespace Pulsar.Server.Forms
             lblPath.AutoSize = true;
             lblPath.Location = new System.Drawing.Point(279, 12);
             lblPath.Name = "lblPath";
-            lblPath.Size = new System.Drawing.Size(75, 13);
             lblPath.TabIndex = 4;
-            lblPath.Text = "Remote Path:";
+            lblPath.Text = "远程路径：";
             // 
             // txtPath
             // 
             txtPath.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txtPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtPath.Location = new System.Drawing.Point(360, 8);
+            txtPath.Location = new System.Drawing.Point(360, 9);
             txtPath.Name = "txtPath";
             txtPath.ReadOnly = true;
-            txtPath.Size = new System.Drawing.Size(323, 22);
+            txtPath.Size = new System.Drawing.Size(314, 22);
             txtPath.TabIndex = 3;
             txtPath.Text = "\\";
             // 
@@ -343,7 +343,6 @@ namespace Pulsar.Server.Forms
             lblDrive.AutoSize = true;
             lblDrive.Location = new System.Drawing.Point(8, 12);
             lblDrive.Name = "lblDrive";
-            lblDrive.Size = new System.Drawing.Size(36, 13);
             lblDrive.TabIndex = 0;
             lblDrive.Text = "驱动器：";
             // 
@@ -351,9 +350,9 @@ namespace Pulsar.Server.Forms
             // 
             cmbDrives.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbDrives.FormattingEnabled = true;
-            cmbDrives.Location = new System.Drawing.Point(50, 8);
+            cmbDrives.Location = new System.Drawing.Point(72, 8);
             cmbDrives.Name = "cmbDrives";
-            cmbDrives.Size = new System.Drawing.Size(212, 21);
+            cmbDrives.Size = new System.Drawing.Size(190, 23);
             cmbDrives.TabIndex = 1;
             cmbDrives.SelectedIndexChanged += cmbDrives_SelectedIndexChanged;
             // 
@@ -401,7 +400,7 @@ namespace Pulsar.Server.Forms
             // hTransferType
             // 
             hTransferType.Text = "传输类型";
-            hTransferType.Width = 93;
+            hTransferType.Width = 120;
             // 
             // hStatus
             // 

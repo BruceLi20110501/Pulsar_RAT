@@ -1,4 +1,4 @@
-﻿using Pulsar.Common.Messages;
+using Pulsar.Common.Messages;
 using Pulsar.Common.Messages.Other;
 using Pulsar.Common.Messages.UserSupport.MessageBox;
 using Pulsar.Common.Messages.UserSupport.RemoteChat;
@@ -6,6 +6,7 @@ using Pulsar.Server.Forms.DarkMode;
 using Pulsar.Server.Helper;
 using Pulsar.Server.Messages;
 using Pulsar.Server.Networking;
+using Pulsar.Server.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -40,12 +41,21 @@ namespace Pulsar.Server.Forms
         }
         public FrmRemoteChat(Client client)
         {
-            DarkModeManager.ApplyDarkMode(this);
             _connectClient = client;
             chatHandler = new RemoteChatHandler(client);
             RegisterMessageHandler();
             InitializeComponent();
+            DarkModeManager.ApplyDarkMode(this);
+            ApplyHighDpiImages();
             message.KeyDown += new KeyEventHandler(message_KeyDown); // Subscribe to the KeyDown event
+        }
+
+        private void ApplyHighDpiImages()
+        {
+            float scale = DpiImageScaling.GetScaleFactor(this);
+            DpiImageScaling.ApplyToIconButton(button2, scale);
+            DpiImageScaling.ApplyToIconButton(button3, scale);
+            DpiImageScaling.ApplyToIconButton(button4, scale);
         }
 
 

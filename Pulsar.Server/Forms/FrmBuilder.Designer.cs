@@ -212,7 +212,7 @@ namespace Pulsar.Server.Forms
             rbSystem.Size = new System.Drawing.Size(60, 17);
             rbSystem.TabIndex = 5;
             rbSystem.TabStop = true;
-            rbSystem.Text = "System";
+            rbSystem.Text = "System 目录";
             tooltip.SetToolTip(rbSystem, "在 System 目录安装客户端需要管理员权限。");
             rbSystem.UseVisualStyleBackColor = true;
             rbSystem.CheckedChanged += HasChangedSettingAndFilePath;
@@ -225,7 +225,7 @@ namespace Pulsar.Server.Forms
             rbProgramFiles.Size = new System.Drawing.Size(94, 17);
             rbProgramFiles.TabIndex = 4;
             rbProgramFiles.TabStop = true;
-            rbProgramFiles.Text = "Program Files";
+            rbProgramFiles.Text = "Program Files 目录";
             tooltip.SetToolTip(rbProgramFiles, "在 Program Files 目录安装客户端需要管理员权限。");
             rbProgramFiles.UseVisualStyleBackColor = true;
             rbProgramFiles.CheckedChanged += HasChangedSettingAndFilePath;

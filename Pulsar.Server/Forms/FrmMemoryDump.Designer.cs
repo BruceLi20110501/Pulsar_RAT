@@ -1,4 +1,4 @@
-﻿namespace Pulsar.Server.Forms
+namespace Pulsar.Server.Forms
 {
     partial class FrmMemoryDump
     {
@@ -38,9 +38,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(490, 11);
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(490, 16);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(84, 36);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -48,43 +49,44 @@
             // 
             // progressDownload
             // 
-            this.progressDownload.Location = new System.Drawing.Point(13, 11);
+            this.progressDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressDownload.Location = new System.Drawing.Point(16, 16);
             this.progressDownload.Name = "progressDownload";
-            this.progressDownload.Size = new System.Drawing.Size(362, 23);
+            this.progressDownload.Size = new System.Drawing.Size(362, 26);
             this.progressDownload.TabIndex = 1;
             // 
             // labelProgress
             // 
             this.labelProgress.AutoSize = true;
-            this.labelProgress.Location = new System.Drawing.Point(381, 16);
+            this.labelProgress.Location = new System.Drawing.Point(384, 22);
             this.labelProgress.Name = "labelProgress";
-            this.labelProgress.Size = new System.Drawing.Size(68, 13);
+            this.labelProgress.Size = new System.Drawing.Size(68, 15);
             this.labelProgress.TabIndex = 2;
             this.labelProgress.Text = "进度：0%";
             // 
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(13, 41);
+            this.labelStatus.Location = new System.Drawing.Point(16, 54);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(40, 13);
+            this.labelStatus.Size = new System.Drawing.Size(40, 15);
             this.labelStatus.TabIndex = 3;
             this.labelStatus.Text = "状态：";
             // 
             // labelValue
             // 
             this.labelValue.AutoSize = true;
-            this.labelValue.Location = new System.Drawing.Point(59, 41);
+            this.labelValue.Location = new System.Drawing.Point(64, 54);
             this.labelValue.Name = "labelValue";
-            this.labelValue.Size = new System.Drawing.Size(55, 13);
+            this.labelValue.Size = new System.Drawing.Size(55, 15);
             this.labelValue.TabIndex = 4;
             this.labelValue.Text = "等待中...";
             // 
             // FrmMemoryDump
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(577, 68);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(590, 82);
             this.Controls.Add(this.labelValue);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.labelProgress);

@@ -1,4 +1,4 @@
-﻿using NAudio.Wave;
+using NAudio.Wave;
 using Pulsar.Common.Messages;
 using Pulsar.Common.Messages.Audio;
 using Pulsar.Common.Messages.Other;
@@ -184,8 +184,8 @@ namespace Pulsar.Server.Messages
                     IsStarted = false;
                     _provider = null;
                     _audioStream = null;
-                    System.Windows.Forms.MessageBox.Show($"Error initializing audio device: {ex.Message}",
-                        "Audio Error",
+                    System.Windows.Forms.MessageBox.Show($"初始化音频设备失败：{ex.Message}",
+                        "音频错误",
                         System.Windows.Forms.MessageBoxButtons.OK,
                         System.Windows.Forms.MessageBoxIcon.Error);
                 }
@@ -195,8 +195,8 @@ namespace Pulsar.Server.Messages
                     IsStarted = false;
                     _provider = null;
                     _audioStream = null;
-                    System.Windows.Forms.MessageBox.Show($"An unexpected error occurred: {ex.Message}",
-                        "Audio Error",
+                    System.Windows.Forms.MessageBox.Show($"发生意外错误：{ex.Message}",
+                        "音频错误",
                         System.Windows.Forms.MessageBoxButtons.OK,
                         System.Windows.Forms.MessageBoxIcon.Error);
                 }

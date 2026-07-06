@@ -26,8 +26,8 @@ namespace Pulsar.Server.Forms
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*";
-                openFileDialog.Title = "Select Browser Executable";
+                openFileDialog.Filter = "可执行文件 (*.exe)|*.exe|所有文件 (*.*)|*.*";
+                openFileDialog.Title = "选择浏览器可执行文件";
                 openFileDialog.CheckFileExists = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -41,21 +41,21 @@ namespace Pulsar.Server.Forms
         {
             if (string.IsNullOrWhiteSpace(txtBrowserPath.Text))
             {
-                MessageBox.Show("Please specify a browser executable path.", "Validation Error", 
+                MessageBox.Show("请指定浏览器可执行文件路径。", "验证错误", 
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtSearchPattern.Text))
             {
-                MessageBox.Show("Please specify a search pattern.", "Validation Error", 
+                MessageBox.Show("请指定搜索模式。", "验证错误", 
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtReplacementPath.Text))
             {
-                MessageBox.Show("Please specify a replacement path.", "Validation Error", 
+                MessageBox.Show("请指定替换路径。", "验证错误", 
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -71,11 +71,11 @@ namespace Pulsar.Server.Forms
             });
 
             MessageBox.Show(
-                $"Generic Chromium browser injection started.\n\n" +
-                $"Browser: {Path.GetFileName(txtBrowserPath.Text)}\n" +
-                $"Search: {txtSearchPattern.Text}\n" +
-                $"Replace: {txtReplacementPath.Text}",
-                "Browser Started",
+                $"通用 Chromium 浏览器注入已启动。\n\n" +
+                $"浏览器：{Path.GetFileName(txtBrowserPath.Text)}\n" +
+                $"搜索：{txtSearchPattern.Text}\n" +
+                $"替换：{txtReplacementPath.Text}",
+                "浏览器已启动",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
             );
@@ -90,9 +90,9 @@ namespace Pulsar.Server.Forms
 
         private void FrmHVNCPopUp_Load(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(txtBrowserPath, "Full path to the browser executable (e.g., C:\\Program Files\\Vivaldi\\Application\\vivaldi.exe)");
-            toolTip1.SetToolTip(txtSearchPattern, "String pattern to search for in browser paths (e.g., Local\\Vivaldi\\User Data)");
-            toolTip1.SetToolTip(txtReplacementPath, "String to replace the search pattern with (e.g., Local\\Vivaldi\\KDOT)");
+            toolTip1.SetToolTip(txtBrowserPath, "浏览器可执行文件完整路径（例如 C:\\Program Files\\Vivaldi\\Application\\vivaldi.exe）");
+            toolTip1.SetToolTip(txtSearchPattern, "在浏览器路径中搜索的字符串（例如 Local\\Vivaldi\\User Data）");
+            toolTip1.SetToolTip(txtReplacementPath, "用于替换搜索模式的字符串（例如 Local\\Vivaldi\\KDOT）");
         }
     }
 }

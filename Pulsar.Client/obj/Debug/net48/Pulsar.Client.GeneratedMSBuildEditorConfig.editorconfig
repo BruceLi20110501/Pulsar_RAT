@@ -1,0 +1,14 @@
+is_global = true
+build_property.ApplicationManifest = app.manifest
+build_property.StartupObject = Pulsar.Client.Program
+build_property.ApplicationDefaultFont = 
+build_property.ApplicationHighDpiMode = 
+build_property.ApplicationUseCompatibleTextRendering = 
+build_property.ApplicationVisualStyles = 
+build_property.RootNamespace = Pulsar.Client
+build_property.ProjectDir = C:\Users\Silver_Fox\Downloads\最新三改自用\最新三改自用\Pulsar.Client\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

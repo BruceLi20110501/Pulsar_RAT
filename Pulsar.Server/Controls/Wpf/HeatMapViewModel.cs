@@ -3,10 +3,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using LiveChartsCore.Drawing;
 using LiveChartsCore.Geo;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
 using Pulsar.Server.Statistics;
+using SkiaSharp;
 
 #nullable enable
 
@@ -172,11 +174,30 @@ namespace Pulsar.Server.Controls.Wpf
                 return;
             }
 
+            var colorStops = _isDarkMode
+                ? new[]
+                {
+                    new LvcColor(SKColor.Parse("#1E293B").Red, SKColor.Parse("#1E293B").Green, SKColor.Parse("#1E293B").Blue, 255),
+                    new LvcColor(SKColor.Parse("#1E3A5F").Red, SKColor.Parse("#1E3A5F").Green, SKColor.Parse("#1E3A5F").Blue, 255),
+                    new LvcColor(SKColor.Parse("#2563EB").Red, SKColor.Parse("#2563EB").Green, SKColor.Parse("#2563EB").Blue, 255),
+                    new LvcColor(SKColor.Parse("#60A5FA").Red, SKColor.Parse("#60A5FA").Green, SKColor.Parse("#60A5FA").Blue, 255),
+                    new LvcColor(SKColor.Parse("#93C5FD").Red, SKColor.Parse("#93C5FD").Green, SKColor.Parse("#93C5FD").Blue, 255)
+                }
+                : new[]
+                {
+                    new LvcColor(SKColor.Parse("#EFF6FF").Red, SKColor.Parse("#EFF6FF").Green, SKColor.Parse("#EFF6FF").Blue, 255),
+                    new LvcColor(SKColor.Parse("#BFDBFE").Red, SKColor.Parse("#BFDBFE").Green, SKColor.Parse("#BFDBFE").Blue, 255),
+                    new LvcColor(SKColor.Parse("#60A5FA").Red, SKColor.Parse("#60A5FA").Green, SKColor.Parse("#60A5FA").Blue, 255),
+                    new LvcColor(SKColor.Parse("#2563EB").Red, SKColor.Parse("#2563EB").Green, SKColor.Parse("#2563EB").Blue, 255),
+                    new LvcColor(SKColor.Parse("#1E3A8A").Red, SKColor.Parse("#1E3A8A").Green, SKColor.Parse("#1E3A8A").Blue, 255)
+                };
+
             Series = new[]
             {
                 new HeatLandSeries
                 {
-                    Lands = lands
+                    Lands = lands,
+                    HeatMap = colorStops
                 }
             };
         }

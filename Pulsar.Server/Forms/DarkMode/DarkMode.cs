@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using Pulsar.Server.Controls;
 using System;
 using System.ComponentModel;
@@ -402,7 +402,7 @@ namespace DarkModeForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + ex.StackTrace, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message + ex.StackTrace, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -529,7 +529,28 @@ namespace DarkModeForms
             if (control is ComboBox comboBox)
             {
                 // Fixing a glitch that makes all instances of the ComboBox showing as having a Selected value, even when they dont
-                control.BeginInvoke(new Action(() => (control as ComboBox).SelectionLength = 0));
+                control.BeginInvoke(new Action(() =>
+                {
+                    try
+                    {
+                        var cb = control as ComboBox;
+                        if (cb == null || cb.IsDisposed || !cb.IsHandleCreated)
+                        {
+                            return;
+                        }
+
+                        int textLength = cb.Text?.Length ?? 0;
+                        int start = cb.SelectionStart;
+                        if (start >= 0 && start <= textLength)
+                        {
+                            cb.SelectionLength = 0;
+                        }
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        // .NET 9 ComboBox can expose invalid SelectionStart during theme application.
+                    }
+                }));
 
                 // Fixes a glitch showing the Combo Backgroud white when the control is Disabled:
                 if (!control.Enabled && this.IsDarkMode)
@@ -638,33 +659,17 @@ namespace DarkModeForms
             {
                 control.GetType().GetProperty("BackColor")?.SetValue(control, control.Parent.BackColor);
                 control.ForeColor = control.Enabled ? OScolors.TextActive : OScolors.TextInactive;
-                control.Paint += (object sender, PaintEventArgs e) =>
-                {
-                    if (control.Enabled == false && this.IsDarkMode)
-                    {
-                        var radio = (sender as CheckBox);
-                        Brush B = new SolidBrush(control.ForeColor);
-
-                        e.Graphics.DrawString(radio.Text, radio.Font,
-                          B, new System.Drawing.PointF(16, 0));
-                    }
-                };
+                var chk = control as CheckBox;
+                chk.Paint -= CheckBoxDisabledTextFix;
+                chk.Paint += CheckBoxDisabledTextFix;
             }
             if (control is RadioButton)
             {
                 control.GetType().GetProperty("BackColor")?.SetValue(control, control.Parent.BackColor);
                 control.ForeColor = control.Enabled ? OScolors.TextActive : OScolors.TextInactive;
-                control.Paint += (object sender, PaintEventArgs e) =>
-                {
-                    if (control.Enabled == false && this.IsDarkMode)
-                    {
-                        var radio = (sender as RadioButton);
-                        Brush B = new SolidBrush(control.ForeColor);
-
-                        e.Graphics.DrawString(radio.Text, radio.Font,
-                          B, new System.Drawing.PointF(16, 0));
-                    }
-                };
+                var rb = control as RadioButton;
+                rb.Paint -= RadioButtonDisabledTextFix;
+                rb.Paint += RadioButtonDisabledTextFix;
             }
             if (control is MenuStrip)
             {
@@ -1097,6 +1102,60 @@ namespace DarkModeForms
         /// <summary>
         /// handle hierarchical context menus (otherwise, only the root level gets themed)
         /// </summary>
+        /// <summary>
+        /// 修复深色模式下 disabled CheckBox 文字重影（系统画一遍 + 旧代码在 (16,0) 又画一遍导致双重文字）。
+        /// 做法：仅在 disabled + 深色时，先用背景色覆盖系统绘制的文字区域，再用 TextRenderer 重绘一份正确颜色的文字。
+        /// </summary>
+        private void CheckBoxDisabledTextFix(object sender, PaintEventArgs e)
+        {
+            if (!(sender is CheckBox chk) || chk.Enabled || !this.IsDarkMode)
+            {
+                return;
+            }
+
+            DrawDisabledCheckLikeText(e, chk, chk.Text, chk.Font, chk.ForeColor, chk.BackColor);
+        }
+
+        /// <summary>
+        /// 同上，处理 disabled RadioButton 的文字重影。
+        /// </summary>
+        private void RadioButtonDisabledTextFix(object sender, PaintEventArgs e)
+        {
+            if (!(sender is RadioButton rb) || rb.Enabled || !this.IsDarkMode)
+            {
+                return;
+            }
+
+            DrawDisabledCheckLikeText(e, rb, rb.Text, rb.Font, rb.ForeColor, rb.BackColor);
+        }
+
+        private static void DrawDisabledCheckLikeText(PaintEventArgs e, Control control, string text, Font font, Color foreColor, Color backColor)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+
+            // 勾选框/圆钮的宽度随 DPI 缩放（与图标算法一致：逻辑 16px × DPI）。
+            int glyphWidth = (int)Math.Round(16 * (e.Graphics.DpiX / 96f));
+            var textRect = new Rectangle(glyphWidth, 0, control.Width - glyphWidth, control.Height);
+
+            // 先用背景色覆盖系统绘制的（重影）文字，再画一份正确的。
+            using (var bg = new SolidBrush(backColor))
+            {
+                e.Graphics.FillRectangle(bg, textRect);
+            }
+
+            TextRenderer.DrawText(
+                e.Graphics,
+                text,
+                font,
+                textRect,
+                foreColor,
+                backColor,
+                TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordEllipsis);
+        }
+
         private void Tsdd_Opening(object sender, CancelEventArgs e)
         {
             ToolStripDropDown tsdd = sender as ToolStripDropDown;

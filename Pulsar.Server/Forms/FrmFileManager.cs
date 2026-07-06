@@ -1,4 +1,4 @@
-﻿using Pulsar.Common.Enums;
+using Pulsar.Common.Enums;
 using Pulsar.Common.Helpers;
 using Pulsar.Common.Messages;
 using Pulsar.Common.Models;
@@ -6,6 +6,7 @@ using Pulsar.Server.Controls;
 using Pulsar.Server.Forms.DarkMode;
 using Pulsar.Server.Helper;
 using Pulsar.Server.Messages;
+using Pulsar.Server.Utilities;
 using Pulsar.Server.Models;
 using Pulsar.Server.Networking;
 using System;
@@ -133,7 +134,7 @@ namespace Pulsar.Server.Forms
             cmbDrives.ValueMember = "RootDirectory";
             cmbDrives.DataSource = new BindingSource(drives, null);
 
-            SetStatusMessage(this, "Ready");
+            SetStatusMessage(this, "就绪");
         }
 
         /// <summary>
@@ -164,7 +165,7 @@ namespace Pulsar.Server.Forms
                 }
             }
 
-            SetStatusMessage(this, "Ready");
+            SetStatusMessage(this, "就绪");
         }
 
         /// <summary>
@@ -177,10 +178,10 @@ namespace Pulsar.Server.Forms
             int imageIndex = -1;
             switch (status)
             {
-                case "Completed":
+                case "已完成":
                     imageIndex = 1;
                     break;
-                case "Canceled":
+                case "已取消":
                     imageIndex = 0;
                     break;
             }
@@ -205,8 +206,9 @@ namespace Pulsar.Server.Forms
                 }
             }
 
+            string typeText = transfer.Type == Enums.TransferType.Upload ? "上传" : "下载";
             var lvi = new ListViewItem(new[]
-                    {transfer.Id.ToString(), transfer.Type.ToString(), transfer.Status, transfer.RemotePath})
+                    {transfer.Id.ToString(), typeText, transfer.Status, transfer.RemotePath})
             { Tag = transfer, ImageIndex = GetTransferImageIndex(transfer.Status) };
 
             lstTransfers.Items.Add(lvi);
@@ -254,7 +256,8 @@ namespace Pulsar.Server.Forms
 
         private void FrmFileManager_Load(object sender, EventArgs e)
         {
-            this.Text = WindowHelper.GetWindowTitle("File Manager", _connectClient);
+            this.Text = WindowHelper.GetWindowTitle("文件管理器", _connectClient);
+            DpiImageScaling.ApplyToIconButton(btnRefresh, DpiImageScaling.GetScaleFactor(this));
             _fileManagerHandler.RefreshDrives();
         }
 
@@ -357,7 +360,7 @@ namespace Pulsar.Server.Forms
                         string path = GetAbsolutePath(files.SubItems[0].Text);
                         string newName = files.SubItems[0].Text;
 
-                        if (InputBox.Show("New name", "Enter new name:", ref newName) == DialogResult.OK)
+                        if (InputBox.Show("重命名", "输入新名称：", ref newName) == DialogResult.OK)
                         {
                             newName = GetAbsolutePath(newName);
                             _fileManagerHandler.RenameFile(path, newName, tag.Type);
@@ -371,8 +374,8 @@ namespace Pulsar.Server.Forms
         {
             int count = lstDirectory.SelectedItems.Count;
             if (count == 0) return;
-            if (MessageBox.Show(string.Format("Are you sure you want to delete {0} file(s)?", count),
-                "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(string.Format("确定要删除 {0} 个文件/文件夹吗？", count),
+                "确认删除", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 foreach (ListViewItem files in lstDirectory.SelectedItems)
                 {
@@ -449,9 +452,9 @@ namespace Pulsar.Server.Forms
         {
             foreach (ListViewItem transfer in lstTransfers.SelectedItems)
             {
-                if (!transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("Downloading") &&
-                    !transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("Uploading") &&
-                    !transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("Pending")) continue;
+                if (!transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("下载中") &&
+                    !transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("上传中") &&
+                    !transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("等待中")) continue;
 
                 int id = int.Parse(transfer.SubItems[(int)TransferColumn.Id].Text);
 
@@ -463,9 +466,9 @@ namespace Pulsar.Server.Forms
         {
             foreach (ListViewItem transfer in lstTransfers.Items)
             {
-                if (transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("Downloading") ||
-                    transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("Uploading") ||
-                    transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("Pending")) continue;
+                if (transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("下载中") ||
+                    transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("上传中") ||
+                    transfer.SubItems[(int)TransferColumn.Status].Text.StartsWith("等待中")) continue;
                 transfer.Remove();
             }
         }
@@ -537,7 +540,7 @@ namespace Pulsar.Server.Forms
         /// <param name="message">The new status.</param>
         private void SetStatusMessage(object sender, string message)
         {
-            stripLblStatus.Text = $"Status: {message}";
+            stripLblStatus.Text = $"状态：{message}";
         }
 
         /// <summary>
@@ -564,7 +567,7 @@ namespace Pulsar.Server.Forms
         private void SwitchDirectory(string remotePath)
         {
             _fileManagerHandler.GetDirectoryContents(remotePath);
-            SetStatusMessage(this, "Loading directory content...");
+            SetStatusMessage(this, "正在加载目录内容...");
         }
 
         private void zipFolderToolStripMenuItem_Click(object sender, EventArgs e)

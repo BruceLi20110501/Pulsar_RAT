@@ -106,6 +106,7 @@
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName).x64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
@@ -119,6 +120,7 @@
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName).x64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -176,7 +178,6 @@
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
-      <OutputFile>$(OutDir)$(ProjectName).x64.dll</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -185,10 +186,7 @@
       <AdditionalLibraryDirectories>$(ProjectDir)src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>if not exist "$(SolutionDir)bin\Debug\net9.0-windows" mkdir "$(SolutionDir)bin\Debug\net9.0-windows"
-    if not exist "$(SolutionDir)bin\Release\net9.0-windows" mkdir "$(SolutionDir)bin\Release\net9.0-windows"
-    copy "$(OutDir)$(ProjectName).x64.dll" "$(SolutionDir)bin\Debug\net9.0-windows\"
-    copy "$(OutDir)$(ProjectName).x64.dll" "$(SolutionDir)bin\Release\net9.0-windows\"</Command>
+      <Command>powershell -NoProfile -ExecutionPolicy Bypass -Command "New-Item -ItemType Directory -Force -Path '$(SolutionDir)bin\Debug\net9.0-windows','$(SolutionDir)bin\Release\net9.0-windows' | Out-Null; Copy-Item -Force -LiteralPath '$(TargetPath)' -Destination '$(SolutionDir)bin\Debug\net9.0-windows\HVNCInjection.x64.dll'; Copy-Item -Force -LiteralPath '$(TargetPath)' -Destination '$(SolutionDir)bin\Release\net9.0-windows\HVNCInjection.x64.dll'"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -253,7 +251,6 @@
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
-      <OutputFile>$(OutDir)$(ProjectName).x64.dll</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -262,10 +259,7 @@
       <AdditionalLibraryDirectories>$(ProjectDir)src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>if not exist "$(SolutionDir)bin\Debug\net9.0-windows" mkdir "$(SolutionDir)bin\Debug\net9.0-windows"
-    if not exist "$(SolutionDir)bin\Release\net9.0-windows" mkdir "$(SolutionDir)bin\Release\net9.0-windows"
-    copy "$(OutDir)$(ProjectName).x64.dll" "$(SolutionDir)bin\Debug\net9.0-windows\"
-    copy "$(OutDir)$(ProjectName).x64.dll" "$(SolutionDir)bin\Release\net9.0-windows\"</Command>
+      <Command>powershell -NoProfile -ExecutionPolicy Bypass -Command "New-Item -ItemType Directory -Force -Path '$(SolutionDir)bin\Debug\net9.0-windows','$(SolutionDir)bin\Release\net9.0-windows' | Out-Null; Copy-Item -Force -LiteralPath '$(TargetPath)' -Destination '$(SolutionDir)bin\Debug\net9.0-windows\HVNCInjection.x64.dll'; Copy-Item -Force -LiteralPath '$(TargetPath)' -Destination '$(SolutionDir)bin\Release\net9.0-windows\HVNCInjection.x64.dll'"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

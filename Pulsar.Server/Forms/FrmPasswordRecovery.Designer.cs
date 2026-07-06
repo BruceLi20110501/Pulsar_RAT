@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Controls;
+using Pulsar.Server.Controls;
 
 namespace Pulsar.Server.Forms
 {
@@ -114,7 +114,7 @@ namespace Pulsar.Server.Forms
             // 
             this.copySelectedToolStripMenuItem.Name = "copySelectedToolStripMenuItem";
             this.copySelectedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.copySelectedToolStripMenuItem.Text = "Selected";
+            this.copySelectedToolStripMenuItem.Text = "已选中";
             this.copySelectedToolStripMenuItem.Click += new System.EventHandler(this.copySelectedToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -136,7 +136,7 @@ namespace Pulsar.Server.Forms
             // 
             this.clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
             this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.clearAllToolStripMenuItem.Text = "All";
+            this.clearAllToolStripMenuItem.Text = "全部";
             this.clearAllToolStripMenuItem.Click += new System.EventHandler(this.clearAllToolStripMenuItem_Click);
             // 
             // clearSelectedToolStripMenuItem
@@ -224,7 +224,7 @@ namespace Pulsar.Server.Forms
             // 
             // hIdentification
             // 
-            this.hIdentification.Text = "Identification";
+            this.hIdentification.Text = "应用标识";
             this.hIdentification.Width = 107;
             // 
             // hURL
@@ -234,7 +234,7 @@ namespace Pulsar.Server.Forms
             // 
             // hUser
             // 
-            this.hUser.Text = "Username";
+            this.hUser.Text = "用户名";
             this.hUser.Width = 142;
             // 
             // hPass

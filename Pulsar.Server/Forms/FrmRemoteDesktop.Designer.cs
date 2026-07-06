@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Controls;
+using Pulsar.Server.Controls;
 using Pulsar.Server.Images.Helpers;
 
 namespace Pulsar.Server.Forms
@@ -70,7 +70,7 @@ namespace Pulsar.Server.Forms
             btnStart.Size = new System.Drawing.Size(68, 28);
             btnStart.TabIndex = 1;
             btnStart.TabStop = false;
-            btnStart.Text = "Start";
+            btnStart.Text = "开始";
             btnStart.UseVisualStyleBackColor = true;
             btnStart.Click += btnStart_Click;
             // 
@@ -82,7 +82,7 @@ namespace Pulsar.Server.Forms
             btnStop.Size = new System.Drawing.Size(68, 28);
             btnStop.TabIndex = 2;
             btnStop.TabStop = false;
-            btnStop.Text = "Stop";
+            btnStop.Text = "停止";
             btnStop.UseVisualStyleBackColor = true;
             btnStop.Click += btnStop_Click;
             // 
@@ -115,7 +115,7 @@ namespace Pulsar.Server.Forms
             lblQualityShow.Name = "lblQualityShow";
             lblQualityShow.Size = new System.Drawing.Size(56, 13);
             lblQualityShow.TabIndex = 5;
-            lblQualityShow.Text = "100 (best)";
+            lblQualityShow.Text = "100 (最佳)";
             // 
             // btnMouse
             // 
@@ -126,7 +126,7 @@ namespace Pulsar.Server.Forms
             btnMouse.Size = new System.Drawing.Size(28, 28);
             btnMouse.TabIndex = 6;
             btnMouse.TabStop = false;
-            toolTipButtons.SetToolTip(btnMouse, "Enable mouse input.");
+            toolTipButtons.SetToolTip(btnMouse, "启用鼠标输入。");
             btnMouse.UseVisualStyleBackColor = true;
             btnMouse.Click += btnMouse_Click;
             // 
@@ -185,7 +185,7 @@ namespace Pulsar.Server.Forms
             btnShowDrawingTools.Size = new System.Drawing.Size(28, 28);
             btnShowDrawingTools.TabIndex = 17;
             btnShowDrawingTools.TabStop = false;
-            toolTipButtons.SetToolTip(btnShowDrawingTools, "Show drawing tools");
+            toolTipButtons.SetToolTip(btnShowDrawingTools, "显示绘图工具");
             btnShowDrawingTools.UseVisualStyleBackColor = true;
             btnShowDrawingTools.Click += btnShowDrawingTools_Click;
             // 
@@ -196,7 +196,7 @@ namespace Pulsar.Server.Forms
             sizeLabelCounter.Name = "sizeLabelCounter";
             sizeLabelCounter.Size = new System.Drawing.Size(55, 23);
             sizeLabelCounter.TabIndex = 11;
-            sizeLabelCounter.Text = "Size: ";
+            sizeLabelCounter.Text = "大小：";
             // 
             // enableGPU
             // 
@@ -207,7 +207,7 @@ namespace Pulsar.Server.Forms
             enableGPU.Size = new System.Drawing.Size(28, 28);
             enableGPU.TabIndex = 10;
             enableGPU.TabStop = false;
-            toolTipButtons.SetToolTip(enableGPU, "Enable mouse input.");
+            toolTipButtons.SetToolTip(enableGPU, "启用 GPU 渲染。");
             enableGPU.UseVisualStyleBackColor = true;
             enableGPU.Click += enableGPU_Click;
             // 
@@ -267,7 +267,7 @@ namespace Pulsar.Server.Forms
             colorPicker.Size = new System.Drawing.Size(60, 28);
             colorPicker.TabIndex = 12;
             colorPicker.TabStop = false;
-            colorPicker.Text = "Color";
+            colorPicker.Text = "颜色";
             toolTipButtons.SetToolTip(colorPicker, "选择绘图颜色");
             colorPicker.UseVisualStyleBackColor = true;
             // 
@@ -279,7 +279,7 @@ namespace Pulsar.Server.Forms
             strokeWidthTrackBar.Size = new System.Drawing.Size(100, 45);
             strokeWidthTrackBar.TabIndex = 13;
             strokeWidthTrackBar.TabStop = false;
-            toolTipButtons.SetToolTip(strokeWidthTrackBar, "Adjust stroke width");
+            toolTipButtons.SetToolTip(strokeWidthTrackBar, "调整笔画宽度");
             strokeWidthTrackBar.Value = 5;
             // 
             // btnDrawing
@@ -317,7 +317,7 @@ namespace Pulsar.Server.Forms
             btnClearDrawing.Size = new System.Drawing.Size(60, 28);
             btnClearDrawing.TabIndex = 16;
             btnClearDrawing.TabStop = false;
-            toolTipButtons.SetToolTip(btnClearDrawing, "Clear drawing");
+            toolTipButtons.SetToolTip(btnClearDrawing, "清除绘图");
             btnClearDrawing.UseVisualStyleBackColor = false;
             btnClearDrawing.Click += btnClearDrawing_Click;
             // 

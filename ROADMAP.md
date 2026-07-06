@@ -1,31 +1,31 @@
-# Pulsar Roadmap
+# Pulsar 路线图
 
 ## Web API
-A web API (e.g. REST-like) allows to interact with the clients in more flexible ways and can be used to build a web interface for Pulsar.
+Web API（例如 RESTful API）允许以更灵活的方式与客户端进行交互，并可用于构建 Pulsar 的 Web 界面。
 
-## Transparent communication protocol
-To open up the way for Pulsar clients in different programming languages the communication protocol needs to be clearly specified and documented.
+## 透明通信协议
+为了向不同编程语言的 Pulsar 客户端敞开大门，需要对通信协议进行清晰的规范和文档化。
 
-## Cross-platform support
-A long-term goal is to support operating systems such as MacOS and Linux. The new .NET Core framework will help achieve this goal.
+## 跨平台支持
+一个长期目标是支持 macOS 和 Linux 等操作系统。.NET Core 新框架将有助于实现这一目标。
 
-## Command line (CLI) version of the server
-It should be possible to use the server as a simple CLI tool to accept and forward (proxy) connections to other servers.
+## 服务器的命令行（CLI）版本
+应该可以将服务器用作简单的 CLI 工具，以接受连接并将其转发（代理）到其他服务器。
 
-## GUI overhaul
-The GUI needs to be reworked in a more modern way, such as WPF or a web-based interface. WPF as GUI framework would drastically improve rendering performance of the remote desktop with the hardware accelerated rendering, similar to a web-based GUI depending on the used browser.
+## GUI 大修
+GUI 需要以更现代的方式进行重构，例如 WPF 或基于 Web 的界面。WPF 作为 GUI 框架，将通过硬件加速渲染，极大地提高远程桌面的渲染性能，类似于基于 Web 的 GUI 取决于所使用的浏览器。
 
-## Allow different types of clients (permissioned clients)
-Allow clients with higher privileges (i.e. ability to administrate other lower privileged clients) connect to the server. This change would allow administrators to manage clients from their own computers with a lightweight client without having to run the server.
+## 允许不同类型的客户端（权限客户端）
+允许具有更高特权（即管理其他低特权客户端的能力）的客户端连接到服务器。此更改将允许管理员使用轻量级客户端从自己的计算机管理客户端，而无需运行服务器。
 
-## Allow client installation as Windows service
-Currently the client is installed on a per-user basis and this makes it unflexible to remotly manage the machine when the user is not logged in. it also requires the client to be installed for every account who uses the machine. Machines which are used by multiple users would greatly benefit when Pulsar could be run as a Windows service.
+## 允许客户端安装为 Windows 服务
+目前，客户端是按用户安装的，这使得在用户未登录时远程管理计算机不够灵活。它还要求为使用该计算机的每个帐户安装客户端。当 Pulsar 可以作为 Windows 服务运行时，多用户使用的计算机将大有裨益。
 
-## Basic client GUI
-Add a basic GUI to the client to allow the user at any time to check the status if a specific feature is active. Additionally it can show a notification when the client gets installed or when someone requests permission to use remote desktop (similar to teamviewer).
+## 基本客户端 GUI
+为客户端添加一个基本 GUI，允许用户随时检查特定功能是否处于活动状态。此外，它可以在客户端安装时或有人请求远程桌面权限时显示通知（类似于 TeamViewer）。
 
 
-# KDOT NOTES
+# KDOT 笔记
 
-## Password Recovery
-Add Browser Scraping so I don't have to have predefined paths for each file.
+## 密码恢复
+添加浏览器抓取功能，这样我就不必为每个文件设置预定义路径。

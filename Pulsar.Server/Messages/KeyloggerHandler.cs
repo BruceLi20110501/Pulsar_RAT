@@ -1,4 +1,4 @@
-﻿using Pulsar.Common.Helpers;
+using Pulsar.Common.Helpers;
 using Pulsar.Common.Messages;
 using Pulsar.Common.Messages.Administration.FileManager;
 using Pulsar.Common.Messages.Monitoring.KeyLogger;
@@ -57,7 +57,7 @@ namespace Pulsar.Server.Messages
             }
             catch (Exception ex)
             {
-                OnReport($"Failed to request logs: {ex.Message}");
+                OnReport($"请求日志失败：{ex.Message}");
             }
         }
 
@@ -65,7 +65,7 @@ namespace Pulsar.Server.Messages
         {
             if (items == null || items.Length == 0)
             {
-                OnReport("No logs found");
+                OnReport("未找到日志");
                 return;
             }
 
@@ -94,7 +94,7 @@ namespace Pulsar.Server.Messages
                 _fileManagerHandler.BeginDownloadFile(item.Name, Path.GetFileName(localPath), true);
 
                 if (await Task.WhenAny(tcs.Task, Task.Delay(30000)) != tcs.Task)
-                    OnReport($"Download timed out: {item.Name}");
+                    OnReport($"下载超时：{item.Name}");
 
                 _fileManagerHandler.FileTransferUpdated -= transferHandler;
 
@@ -105,14 +105,14 @@ namespace Pulsar.Server.Messages
                 OnReport(GetDownloadProgress(_allTransfers, _completedTransfers));
             }
 
-            OnReport("Successfully retrieved all logs");
+            OnReport("已成功获取全部日志");
         }
 
         private void Execute(ISender sender, GetKeyloggerLogsDirectoryResponse message)
         {
             if (string.IsNullOrWhiteSpace(message.LogsDirectory))
             {
-                OnReport("Invalid or empty logs directory.");
+                OnReport("日志目录无效或为空。");
                 return;
             }
 
@@ -122,14 +122,14 @@ namespace Pulsar.Server.Messages
 
         private void StatusUpdated(object? sender, string value)
         {
-            OnReport($"No logs found ({value})");
+            OnReport($"未找到日志（{value}）");
         }
 
         private void DirectoryChanged(object? sender, string remotePath, FileSystemEntry[] items)
         {
             if (items == null || items.Length == 0)
             {
-                OnReport("No logs found");
+                OnReport("未找到日志");
                 return;
             }
 
@@ -164,12 +164,12 @@ namespace Pulsar.Server.Messages
             {
                 SafeWriteDeobfuscatedLog(transfer);
                 OnReport(_completedTransfers >= _allTransfers
-                    ? "Successfully retrieved all logs"
+                    ? "已成功获取全部日志"
                     : GetDownloadProgress());
             }
             catch (Exception ex)
             {
-                OnReport($"Failed to process log file: {ex.Message}");
+                OnReport($"处理日志文件失败：{ex.Message}");
             }
         }
 
@@ -234,9 +234,9 @@ namespace Pulsar.Server.Messages
 
         private string GetDownloadProgress(int allTransfers, int completedTransfers)
         {
-            if (allTransfers <= 0) return "Downloading...";
+            if (allTransfers <= 0) return "下载中...";
             decimal progress = Math.Round((decimal)completedTransfers / allTransfers * 100m, 2);
-            return $"Downloading... {progress}% ({completedTransfers}/{allTransfers})";
+            return $"下载中... {progress}% ({completedTransfers}/{allTransfers})";
         }
 
         private void SubscribeEvents()

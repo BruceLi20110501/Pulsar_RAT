@@ -1,4 +1,4 @@
-﻿using Pulsar.Common.Enums;
+using Pulsar.Common.Enums;
 using Pulsar.Common.Messages;
 using Pulsar.Server.Forms.DarkMode;
 using Pulsar.Server.Helper;
@@ -183,8 +183,8 @@ namespace Pulsar.Server.Forms
                 bool anyChecked = this.Controls.OfType<CheckBox>().Any(cb => cb.Checked);
 
                 ofd.Filter = anyChecked
-                    ? "Executable Files (*.exe)|*.exe"
-                    : "All Files (*.*)|*.*";
+                    ? "可执行文件 (*.exe)|*.exe"
+                    : "所有文件 (*.*)|*.*";
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -322,8 +322,8 @@ namespace Pulsar.Server.Forms
                 bool anyChecked = this.Controls.OfType<CheckBox>().Any(cb => cb.Checked);
 
                 ofd.Filter = anyChecked
-                    ? "Executable Files (*.exe)|*.exe"
-                    : "All Files (*.*)|*.*";
+                    ? "可执行文件 (*.exe)|*.exe"
+                    : "所有文件 (*.*)|*.*";
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {

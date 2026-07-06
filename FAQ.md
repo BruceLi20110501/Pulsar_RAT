@@ -1,68 +1,76 @@
-# FAQ
+## 常见问题（FAQ）
 
-## Table of Contents
+### 目录
 
-* [Shellcode Not Working](#shellcode-not-working)
+* [Shellcode 无法正常工作](#shellcode-not-working)
 
-  * [Enabling Shellcode Outputs](#enabling-shellcode-outputs)
-  * [Alternative Build Process](#alternative-build-process)
+  * [启用 Shellcode 输出](#enabling-shellcode-outputs)
+  * [替代构建方法](#alternative-build-process)
 
 ---
 
-## Shellcode Not Working
+## Shellcode 无法正常工作
 
-If shellcode generation or execution isn't producing the expected outputs, it often means the project wasn't built with the shellcode feature enabled. Follow the steps below to ensure your build configuration includes Donut support.
+如果生成或执行 Shellcode 后没有得到预期结果，通常意味着项目在编译时**未启用 Shellcode 功能**。请按照以下步骤操作，确保构建配置包含 **Donut** 支持。
 
-### Enabling Shellcode Outputs
+### 启用 Shellcode 输出
 
-1. **Open the solution**: Launch Visual Studio and open `Pulsar.sln`.
+1. **打开解决方案**
 
-   ![Open Project](Images/open_project.png)
+   启动 Visual Studio，并打开 `Pulsar.sln`。
 
-2. **Select build configuration**:
+   ![打开项目](Images/open_project.png)
 
-   * Locate the configuration selector on the toolbar (usually reads `Debug` or `Release`).
-   
-   ![Select Configuration](Images/select_config.png)
-   
-   * Change it to **ReleaseWithDonut**.
+2. **选择构建配置**
 
-   ![Build with Donut Enabled](Images/build_with_donut.png)
+   * 在工具栏中找到构建配置选择框（通常显示为 `Debug` 或 `Release`）。
 
-3. **Build the solution**:
+     ![选择配置](Images/select_config.png)
 
-   * Go to `Build → Build Solution` or press `Ctrl + Shift + B`.
+   * 将其切换为 **ReleaseWithDonut**。
 
-   ![Build Solution](Images/build_solution.png)
+     ![启用 Donut 构建](Images/build_with_donut.png)
 
-4. **Verify outputs**:
+3. **编译解决方案**
 
-   * After a successful build, navigate to `bin/Release`.
-   * Confirm that the shellcode converter files (donut.exe) are present.
+   * 点击 **Build（生成）→ Build Solution（生成解决方案）**，或按下 **Ctrl + Shift + B**。
 
-### Alternative Build Process
+     ![生成解决方案](Images/build_solution.png)
 
-If you cannot use Visual Studio or the standard build fails, enable shellcode outputs manually:
+4. **验证输出**
 
-1. **Download Donut**:
+   * 编译成功后，进入 `bin/Release` 目录。
+   * 确认其中包含 Shellcode 转换工具文件（`donut.exe`）。
 
-   * Visit the [Donut Releases page](https://github.com/TheWover/donut/releases).
-   * Download the latest `donut.exe` for your operating system.
+---
 
-   ![Download Donut](Images/download_donut.png)
+## 替代构建方法
 
-2. **Extract the binary**:
+如果无法使用 Visual Studio，或者标准构建失败，可以手动启用 Shellcode 输出功能。
 
-   * Unzip or extract the downloaded archive to locate `donut.exe`.
+1. **下载 Donut**
 
-3. **Copy to Pulsar output**:
+   * 前往 **Donut Releases** 页面。
+   * 下载适用于当前操作系统的最新版本 `donut.exe`。
 
-   * Place `donut.exe` into your Pulsar build directory: `bin/ReleaseWithDonut`.
+     ![下载 Donut](Images/download_donut.png)
 
-   ![Move Donut to Bin](Images/move_to_bin.png)
+2. **解压文件**
 
-4. **Verify manual setup**:
+   * 解压下载的压缩包，找到 `donut.exe`。
 
-   * Check Pulsar if the build shellcode artifact is enabled.
+3. **复制到 Pulsar 输出目录**
+
+   * 将 `donut.exe` 放入 Pulsar 的构建输出目录：
+
+     ```text
+     bin/ReleaseWithDonut
+     ```
+
+     ![移动 Donut 到 Bin 目录](Images/move_to_bin.png)
+
+4. **验证手动配置**
+
+   * 启动 Pulsar，确认 **Shellcode 构建（Build Shellcode）** 功能已启用。
 
 ---

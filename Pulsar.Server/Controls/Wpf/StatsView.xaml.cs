@@ -74,26 +74,33 @@ namespace Pulsar.Server.Controls.Wpf
         {
             Dispatcher.Invoke(() =>
             {
-                UpdateBrush("StatsBackgroundBrush", isDarkMode ? "#FF1A1A1A" : "#FFFFFFFF");
-                UpdateBrush("CardBackgroundBrush", isDarkMode ? "#FF222327" : "#FFF5F5F5");
-                UpdateBrush("CardBorderBrush", isDarkMode ? "#FF2E3136" : "#FFE0E0E0");
-                UpdateBrush("CardForegroundBrush", isDarkMode ? "#FFE8EAED" : "#FF1F1F1F");
-                UpdateBrush("MutedTextBrush", isDarkMode ? "#FF9AA0A6" : "#FF5F6368");
-                UpdateBrush("AccentBrush", isDarkMode ? "#FF64B5F6" : "#FF1976D2");
-                UpdateBrush("PositiveAccentBrush", isDarkMode ? "#FF81C784" : "#FF2E7D32");
-                UpdateBrush("NegativeAccentBrush", isDarkMode ? "#FFEF5350" : "#FFC62828");
-                UpdateBrush("SectionHeaderBrush", isDarkMode ? "#FF64B5F6" : "#FF1976D2");
-                UpdateBrush("ChartBackgroundBrush", isDarkMode ? "#FF1E1F23" : "#FFFFFFFF");
-                UpdateBrush("ChartBorderBrush", isDarkMode ? "#FF2F3338" : "#FFE0E0E0");
-                UpdateBrush("ScrollBarTrackBrush", isDarkMode ? "#FF1E1E1E" : "#FFE5E5E5");
-                UpdateBrush("ScrollBarThumbBrush", isDarkMode ? "#FF444444" : "#FFB5B5B5");
-                UpdateBrush("ScrollBarThumbHoverBrush", isDarkMode ? "#FF5A5A5A" : "#FF9E9E9E");
-                UpdateBrush("ScrollBarThumbPressedBrush", isDarkMode ? "#FF737373" : "#FF7C7C7C");
+                UpdateBrush("StatsBackgroundBrush", isDarkMode ? "#FF000000" : "#FFF8F9FB");
+                UpdateBrush("CardBackgroundBrush", isDarkMode ? "#FF111111" : "#FFFFFFFF");
+                UpdateBrush("CardBorderBrush", isDarkMode ? "#FF222222" : "#FFE5E7EB");
+                UpdateBrush("CardForegroundBrush", isDarkMode ? "#FFE5E7EB" : "#FF1A1A2E");
+                UpdateBrush("MutedTextBrush", isDarkMode ? "#FF8B92A5" : "#FF6B7280");
+                UpdateBrush("AccentBrush", isDarkMode ? "#FF60A5FA" : "#FF3B82F6");
+                UpdateBrush("PositiveAccentBrush", isDarkMode ? "#FF34D399" : "#FF10B981");
+                UpdateBrush("NegativeAccentBrush", isDarkMode ? "#FFF87171" : "#FFEF4444");
+                UpdateBrush("SectionHeaderBrush", isDarkMode ? "#FFF1F5F9" : "#FF1A1A2E");
+                UpdateBrush("ChartBackgroundBrush", isDarkMode ? "#FF111111" : "#FFFFFFFF");
+                UpdateBrush("ChartBorderBrush", isDarkMode ? "#FF222222" : "#FFE5E7EB");
+                UpdateBrush("ScrollBarTrackBrush", isDarkMode ? "#FF0A0A0A" : "#FFF1F1F1");
+                UpdateBrush("ScrollBarThumbBrush", isDarkMode ? "#FF333333" : "#FFC4C4C4");
+                UpdateBrush("ScrollBarThumbHoverBrush", isDarkMode ? "#FF4A4A4A" : "#FFA3A3A3");
+                UpdateBrush("ScrollBarThumbPressedBrush", isDarkMode ? "#FF666666" : "#FF787878");
+                UpdateColor("ShadowColor", isDarkMode ? "#40000000" : "#20000000");
 
                 LayoutRoot.Background = (Brush)Resources["StatsBackgroundBrush"];
                 ApplyChartTheme();
                 _viewModel.UpdateTheme(isDarkMode);
             });
+        }
+
+        private void UpdateColor(string resourceKey, string hex)
+        {
+            var color = (Color)ColorConverter.ConvertFromString(hex)!;
+            Resources[resourceKey] = color;
         }
 
         private void UpdateBrush(string resourceKey, string hex)
@@ -134,22 +141,18 @@ namespace Pulsar.Server.Controls.Wpf
             _countryChart.Background = chartBackgroundBrush;
             _operatingSystemChart.Background = chartBackgroundBrush;
 
-            _newClientsChart.BorderBrush = chartBorderBrush;
-            _countryChart.BorderBrush = chartBorderBrush;
-            _operatingSystemChart.BorderBrush = chartBorderBrush;
-
-            var borderThickness = new Thickness(1);
-            _newClientsChart.BorderThickness = borderThickness;
-            _countryChart.BorderThickness = borderThickness;
-            _operatingSystemChart.BorderThickness = borderThickness;
+            _newClientsChart.BorderThickness = new Thickness(0);
+            _countryChart.BorderThickness = new Thickness(0);
+            _operatingSystemChart.BorderThickness = new Thickness(0);
         }
 
         private static CartesianChart CreateCartesianChart()
         {
             return new CartesianChart
             {
-                Height = 240,
-                Padding = new Thickness(8)
+                Height = 260,
+                Padding = new Thickness(4),
+                BorderThickness = new Thickness(0)
             };
         }
 
@@ -157,8 +160,9 @@ namespace Pulsar.Server.Controls.Wpf
         {
             return new PieChart
             {
-                Height = 160,
-                Padding = new Thickness(8)
+                Height = 180,
+                Padding = new Thickness(4),
+                BorderThickness = new Thickness(0)
             };
         }
 

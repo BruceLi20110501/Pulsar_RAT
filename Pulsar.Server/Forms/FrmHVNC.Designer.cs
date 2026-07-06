@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Controls;
+using Pulsar.Server.Controls;
 
 namespace Pulsar.Server.Forms
 {
@@ -214,13 +214,6 @@ namespace Pulsar.Server.Forms
             // 
             // contextMenuStrip
             // 
-            contextMenuStrip.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            contextMenuStrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuItem1, menuItem2, startEdgeToolStripMenuItem, startBraveToolStripMenuItem, startOperaToolStripMenuItem, startOperaGXToolStripMenuItem, startFirefoxToolStripMenuItem, startCmdToolStripMenuItem, startPowershellToolStripMenuItem, startDiscordToolStripMenuItem, startCustomPathToolStripMenuItem, cLONEBROWSERPROFILEToolStripMenuItem });
-            contextMenuStrip.Name = "contextMenuStrip";
-            contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            contextMenuStrip.Size = new System.Drawing.Size(206, 268);
-            this.contextMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.contextMenuStrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItem1,
@@ -237,7 +230,6 @@ namespace Pulsar.Server.Forms
             this.startGenericChromiumToolStripMenuItem,
             this.cLONEBROWSERPROFILEToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuStrip.Size = new System.Drawing.Size(216, 290);
             // 
             // menuItem1
@@ -310,7 +302,7 @@ namespace Pulsar.Server.Forms
             startPowershellToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Control;
             startPowershellToolStripMenuItem.Name = "startPowershellToolStripMenuItem";
             startPowershellToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            startPowershellToolStripMenuItem.Text = "Start Powershell";
+            startPowershellToolStripMenuItem.Text = "启动 Powershell";
             startPowershellToolStripMenuItem.Click += startPowershellToolStripMenuItem_Click;
             // 
             // startDiscordToolStripMenuItem
@@ -326,7 +318,7 @@ namespace Pulsar.Server.Forms
             startCustomPathToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Control;
             startCustomPathToolStripMenuItem.Name = "startCustomPathToolStripMenuItem";
             startCustomPathToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            startCustomPathToolStripMenuItem.Text = "Start Custom Path";
+            startCustomPathToolStripMenuItem.Text = "启动自定义路径";
             startCustomPathToolStripMenuItem.Click += startCustomPathToolStripMenuItem_Click;
             // 
             // startGenericChromiumToolStripMenuItem

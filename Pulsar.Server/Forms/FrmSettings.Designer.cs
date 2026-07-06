@@ -274,22 +274,21 @@ namespace Pulsar.Server.Forms
             // 
             // groupBox1
             // 
-            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox1.Controls.Add(BlockedRichTB);
-            groupBox1.Location = new System.Drawing.Point(39, 415);
+            groupBox1.Location = new System.Drawing.Point(12, 418);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(290, 137);
+            groupBox1.Padding = new System.Windows.Forms.Padding(8, 6, 8, 8);
+            groupBox1.Size = new System.Drawing.Size(336, 130);
             groupBox1.TabIndex = 30;
             groupBox1.TabStop = false;
-            groupBox1.Text = "已屏蔽的 IP";
+            groupBox1.Text = "已屏蔽的 IP（每行一个）";
             // 
             // BlockedRichTB
             // 
-            BlockedRichTB.Anchor = System.Windows.Forms.AnchorStyles.None;
-            BlockedRichTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            BlockedRichTB.Location = new System.Drawing.Point(3, 18);
+            BlockedRichTB.Dock = System.Windows.Forms.DockStyle.Fill;
+            BlockedRichTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             BlockedRichTB.Name = "BlockedRichTB";
-            BlockedRichTB.Size = new System.Drawing.Size(284, 116);
             BlockedRichTB.TabIndex = 0;
             BlockedRichTB.Text = "";
             // 

@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Forms.DarkMode;
+using Pulsar.Server.Forms.DarkMode;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -50,15 +50,15 @@ namespace Pulsar.Server.Forms
             this.btnManage.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
             this.btnManage.Location = new System.Drawing.Point(12, 45);
             this.btnManage.Name = "btnManage";
-            this.btnManage.Size = new System.Drawing.Size(80, 30);
+            this.btnManage.Size = new System.Drawing.Size(80, 36);
             this.btnManage.TabIndex = 0;
-            this.btnManage.Text = "Manage";
+            this.btnManage.Text = "管理";
             this.btnManage.UseVisualStyleBackColor = true;
 
             this.btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
             this.btnRefresh.Location = new System.Drawing.Point(100, 45);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(80, 30);
+            this.btnRefresh.Size = new System.Drawing.Size(80, 36);
             this.btnRefresh.TabIndex = 1;
             this.btnRefresh.Text = "刷新";
             this.btnRefresh.UseVisualStyleBackColor = true;
@@ -66,7 +66,7 @@ namespace Pulsar.Server.Forms
             this.btnBrowse.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             this.btnBrowse.Location = new System.Drawing.Point(580, 45);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(120, 30);
+            this.btnBrowse.Size = new System.Drawing.Size(120, 36);
             this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "浏览插件";
             this.btnBrowse.UseVisualStyleBackColor = true;
@@ -95,7 +95,7 @@ namespace Pulsar.Server.Forms
             rowHeightImages.ImageSize = new Size(1, 28);
             this.listView.SmallImageList = rowHeightImages;
 
-            this.colName.Text = "Plugin Name";
+            this.colName.Text = "插件名称";
             this.colName.Width = 320;
 
             this.colVersion.Text = "版本";
@@ -114,7 +114,7 @@ namespace Pulsar.Server.Forms
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             this.btnSave.Location = new System.Drawing.Point(500, 450);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(120, 30);
+            this.btnSave.Size = new System.Drawing.Size(120, 36);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "保存并重启";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -122,7 +122,7 @@ namespace Pulsar.Server.Forms
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             this.btnClose.Location = new System.Drawing.Point(630, 450);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(80, 30);
+            this.btnClose.Size = new System.Drawing.Size(80, 36);
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "关闭";
             this.btnClose.UseVisualStyleBackColor = true;

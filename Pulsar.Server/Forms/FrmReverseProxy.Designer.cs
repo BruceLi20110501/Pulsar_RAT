@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Controls;
+using Pulsar.Server.Controls;
 
 namespace Pulsar.Server.Forms
 {
@@ -238,6 +238,7 @@ namespace Pulsar.Server.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(777, 402);
+            this.MinimumSize = new System.Drawing.Size(500, 300);
             this.Controls.Add(this.lblLoadBalance);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblProxyInfo);
@@ -250,7 +251,7 @@ namespace Pulsar.Server.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmReverseProxy";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reverse Proxy []";
+            this.Text = "反向代理 []";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmReverseProxy_FormClosing);
             this.Load += new System.EventHandler(this.FrmReverseProxy_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudServerPort)).EndInit();

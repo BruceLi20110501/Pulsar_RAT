@@ -1,6 +1,5 @@
 using System.IO;
 using System.Windows.Forms;
-using Microsoft.Win32;
 using Newtonsoft.Json;
 
 namespace Pulsar.Server.Models
@@ -13,29 +12,6 @@ namespace Pulsar.Server.Models
         private static readonly object _lockObject = new object();
 
         public static readonly string CertificatePath = Path.Combine(PulsarStuffDir, "Pulsar.p12");
-
-        private static bool _isDarkMode()
-        {
-            int res = -1;
-            try
-            {
-                res = (int)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "AppsUseLightTheme", -1);
-            }
-            catch { }
-
-            if (res == 0)
-            {
-                return true;
-            }
-            else if (res == 1)
-            {
-                return false;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
         private static SettingsModel LoadSettings()
         {
@@ -57,14 +33,12 @@ namespace Pulsar.Server.Models
                     else
                     {
                         _settings = new SettingsModel();
-                        _settings.DarkMode = _isDarkMode();
                         SaveSettings();
                     }
                 }
                 catch
                 {
                     _settings = new SettingsModel();
-                    _settings.DarkMode = _isDarkMode();
                 }
 
                 return _settings;

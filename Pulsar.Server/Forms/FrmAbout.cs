@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Forms.DarkMode;
+using Pulsar.Server.Forms.DarkMode;
 using Pulsar.Server.Utilities;
 using System;
 using System.Diagnostics;
@@ -10,12 +10,14 @@ namespace Pulsar.Server.Forms
 {
     public partial class FrmAbout : Form
     {
-        private readonly string _repositoryUrl = @"https://github.com/Quasar-Continuation/PulsarK";
-        private readonly string _telegramUrl = @"https://t.me/novashadowisgay";
+        private readonly string _repositoryUrl = @"https://github.com/BruceLi20110501/Pulsar_RAT";
+        private readonly string _telegramUrl = @"https://t.me/+h7gwb2c5NaM0M2M5";
 
         // 贡献者信息
         private const string ContributorsMessage = """
-- [Bruce](https://github.com/BruceLi20110501) – 中文汉化+二次开发
+
+- [𝙎𝙐𝙍𝙂𝙀 𝙒𝙄𝙉] – 插件维护与开发
+- [Bruce](https://github.com/BruceLi20110501) – 中文汉化与二次开发
 - [KingKDot](https://github.com/KingKDot) – 主要开发者
 - [TheChosenSkywalker](https://github.com/thechosenskywalker) – 主要开发者
 - [MaxXor](https://github.com/MaxXor) – Quasar RAT 原始作者
@@ -39,9 +41,12 @@ namespace Pulsar.Server.Forms
             InitializeComponent();
 
             DarkModeManager.ApplyDarkMode(this);
+            DpiImageScaling.ApplyToIconPictureBox(picIcon, DpiImageScaling.GetScaleFactor(this), 64);
             ScreenCaptureHider.ScreenCaptureHider.Apply(this.Handle);
 
             lblVersion.Text = ServerVersion.Display;
+            lblTitle.Text = ServerVersion.AppName;
+            Text = $"{ServerVersion.AppName} - 关于";
             rtxtContent.Text = Properties.Resources.License;
             cntTxtContent.Text = ContributorsMessage;
 
@@ -49,7 +54,7 @@ namespace Pulsar.Server.Forms
             lnkTelegram.Links.Add(new LinkLabel.Link { LinkData = _telegramUrl });
             lnkCredits.Links.Add(new LinkLabel.Link
             {
-                LinkData = "https://github.com/Quasar-Continuation/PulsarK/tree/main/Licenses"
+                LinkData = "https://github.com/BruceLi20110501/Pulsar_RAT/tree/main/Licenses"
             });
         }
 
@@ -179,7 +184,7 @@ namespace Pulsar.Server.Forms
             {
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = "https://github.com/Quasar-Continuation/PulsarK",
+                    FileName = "https://github.com/BruceLi20110501/Pulsar_RAT",
                     UseShellExecute = true
                 });
             }

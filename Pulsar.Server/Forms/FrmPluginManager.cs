@@ -1,4 +1,4 @@
-﻿using Pulsar.Server.Forms.DarkMode;
+using Pulsar.Server.Forms.DarkMode;
 using Pulsar.Server.Plugins;
 using Pulsar.Server.Utilities;
 using System;
@@ -602,83 +602,114 @@ namespace Pulsar.Server.Forms
             var detailsForm = new Form
             {
                 Text = $"插件详情 - {pluginInfo.Name}",
-                Size = new Size(500, 400),
+                ClientSize = new Size(580, 420),
+                MinimumSize = new Size(540, 380),
                 StartPosition = FormStartPosition.CenterParent,
                 Owner = this,
-                Icon = this.Icon
+                Icon = this.Icon,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                MaximizeBox = false,
+                MinimizeBox = false
             };
 
-            var panel = new Panel
+            DarkModeManager.ApplyDarkMode(detailsForm);
+            ScreenCaptureHider.ScreenCaptureHider.Apply(detailsForm.Handle);
+
+            var contentPanel = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
-                Padding = new Padding(10),
-                BackColor = Color.FromArgb(45, 45, 48),
-                ForeColor = Color.White
+                Padding = new Padding(28, 24, 28, 16),
+                ColumnCount = 2,
+                RowCount = 5,
+                BackColor = Color.FromArgb(45, 45, 48)
             };
+            contentPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 96));
+            contentPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+            contentPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+            contentPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 36));
+            contentPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 36));
+            contentPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 36));
+            contentPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 
-            var nameLabel = new Label
-            {
-                Text = $"插件名称: {pluginInfo.Name}",
-                Font = new Font("Segoe UI", 12, FontStyle.Bold),
-                Location = new Point(10, 10),
-                Size = new Size(460, 25),
-                ForeColor = Color.White
-            };
+            var titleFont = new Font("Segoe UI", 12F, FontStyle.Bold);
+            var labelFont = new Font("Segoe UI", 9.75F, FontStyle.Regular);
+            var valueFont = new Font("Segoe UI", 9.75F, FontStyle.Regular);
 
-            var versionLabel = new Label
-            {
-                Text = $"版本: {pluginInfo.Version}",
-                Font = new Font("Segoe UI", 10),
-                Location = new Point(10, 45),
-                Size = new Size(460, 20),
-                ForeColor = Color.White
-            };
+            contentPanel.Controls.Add(CreateFieldLabel("插件名称", labelFont), 0, 0);
+            contentPanel.Controls.Add(CreateFieldValue(pluginInfo.Name, titleFont), 1, 0);
+            contentPanel.Controls.Add(CreateFieldLabel("版本", labelFont), 0, 1);
+            contentPanel.Controls.Add(CreateFieldValue(pluginInfo.Version, valueFont), 1, 1);
+            contentPanel.Controls.Add(CreateFieldLabel("类型", labelFont), 0, 2);
+            contentPanel.Controls.Add(CreateFieldValue(pluginInfo.Type, valueFont), 1, 2);
+            contentPanel.Controls.Add(CreateFieldLabel("状态", labelFont), 0, 3);
+            contentPanel.Controls.Add(CreateFieldValue(
+                pluginInfo.Enabled ? "已启用" : "已禁用",
+                valueFont,
+                pluginInfo.Enabled ? Color.LightGreen : Color.LightCoral), 1, 3);
+            contentPanel.Controls.Add(CreateFieldLabel("描述", labelFont, ContentAlignment.TopLeft), 0, 4);
 
-            var typeLabel = new Label
+            var descriptionBox = new TextBox
             {
-                Text = $"类型: {pluginInfo.Type}",
-                Font = new Font("Segoe UI", 10),
-                Location = new Point(10, 70),
-                Size = new Size(460, 20),
-                ForeColor = Color.White
-            };
-
-            var statusLabel = new Label
-            {
-                Text = $"状态: {(pluginInfo.Enabled ? "已启用" : "已禁用")}",
-                Font = new Font("Segoe UI", 10),
-                Location = new Point(10, 95),
-                Size = new Size(460, 20),
-                ForeColor = pluginInfo.Enabled ? Color.LightGreen : Color.LightCoral
-            };
-
-            var descriptionLabel = new Label
-            {
-                Text = $"描述: {pluginInfo.Description}",
-                Font = new Font("Segoe UI", 10),
-                Location = new Point(10, 120),
-                Size = new Size(460, 60),
-                ForeColor = Color.White
-            };
-
-            var uninstallButton = new Button
-            {
-                Text = "卸载",
-                Location = new Point(10, 200),
-                Size = new Size(100, 30),
-                BackColor = Color.FromArgb(60, 60, 63),
+                Text = pluginInfo.Description,
+                Font = valueFont,
                 ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat
+                BackColor = Color.FromArgb(37, 37, 40),
+                BorderStyle = BorderStyle.FixedSingle,
+                Multiline = true,
+                ReadOnly = true,
+                ScrollBars = ScrollBars.Vertical,
+                Dock = DockStyle.Fill,
+                TabStop = false
             };
+            contentPanel.Controls.Add(descriptionBox, 1, 4);
+
+            var buttonPanel = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 64,
+                Padding = new Padding(28, 12, 28, 18),
+                FlowDirection = FlowDirection.RightToLeft,
+                WrapContents = false,
+                BackColor = Color.FromArgb(45, 45, 48)
+            };
+
+            var closeButton = CreateDialogButton("关闭");
+            closeButton.Click += (s, ev) => detailsForm.Close();
+
+            var uninstallButton = CreateDialogButton("卸载");
+            uninstallButton.Margin = new Padding(10, 0, 0, 0);
             uninstallButton.Click += (s, ev) =>
             {
-                var confirm = MessageBox.Show($"确定要移除 {pluginInfo.Name} 吗? 此操作将删除该 DLL 文件。", "确认卸载", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (confirm != DialogResult.Yes) return;
+                var confirm = MessageBox.Show(
+                    $"确定要移除 {pluginInfo.Name} 吗? 此操作将删除该 DLL 文件。",
+                    "确认卸载",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (confirm != DialogResult.Yes)
+                {
+                    return;
+                }
+
                 try
                 {
-                    if (System.IO.File.Exists(pluginInfo.FilePath)) System.IO.File.Delete(pluginInfo.FilePath);
-                    if (System.IO.File.Exists(pluginInfo.DisabledPath)) System.IO.File.Delete(pluginInfo.DisabledPath);
-                    try { _pluginManager.ReloadPlugins(); } catch { }
+                    if (File.Exists(pluginInfo.FilePath))
+                    {
+                        File.Delete(pluginInfo.FilePath);
+                    }
+
+                    if (File.Exists(pluginInfo.DisabledPath))
+                    {
+                        File.Delete(pluginInfo.DisabledPath);
+                    }
+
+                    try
+                    {
+                        _pluginManager.ReloadPlugins();
+                    }
+                    catch
+                    {
+                    }
+
                     LoadPlugins();
                     detailsForm.Close();
                 }
@@ -688,21 +719,56 @@ namespace Pulsar.Server.Forms
                 }
             };
 
-            var closeButton = new Button
+            buttonPanel.Controls.Add(closeButton);
+            buttonPanel.Controls.Add(uninstallButton);
+
+            detailsForm.Controls.Add(contentPanel);
+            detailsForm.Controls.Add(buttonPanel);
+            detailsForm.AcceptButton = closeButton;
+
+            detailsForm.ShowDialog();
+        }
+
+        private static Label CreateFieldLabel(string text, Font font, ContentAlignment alignment = ContentAlignment.MiddleLeft)
+        {
+            return new Label
             {
-                Text = "关闭",
-                Location = new Point(370, 200),
-                Size = new Size(100, 30),
+                Text = text,
+                Font = font,
+                ForeColor = Color.FromArgb(180, 180, 180),
+                Dock = DockStyle.Fill,
+                TextAlign = alignment,
+                AutoEllipsis = true
+            };
+        }
+
+        private static Label CreateFieldValue(string text, Font font, Color? foreColor = null)
+        {
+            return new Label
+            {
+                Text = text,
+                Font = font,
+                ForeColor = foreColor ?? Color.White,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleLeft,
+                AutoEllipsis = true
+            };
+        }
+
+        private static Button CreateDialogButton(string text)
+        {
+            var button = new Button
+            {
+                Text = text,
+                AutoSize = true,
+                MinimumSize = new Size(104, 36),
+                Padding = new Padding(16, 6, 16, 6),
                 BackColor = Color.FromArgb(60, 60, 63),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat
             };
-            closeButton.Click += (s, ev) => detailsForm.Close();
-
-            panel.Controls.AddRange(new Control[] { nameLabel, versionLabel, typeLabel, statusLabel, descriptionLabel, uninstallButton, closeButton });
-            detailsForm.Controls.Add(panel);
-
-            detailsForm.ShowDialog();
+            button.FlatAppearance.BorderColor = Color.FromArgb(90, 90, 90);
+            return button;
         }
 
         private void listView_DragEnter(object sender, DragEventArgs e)

@@ -1,4 +1,4 @@
-﻿using Gma.System.MouseKeyHook;
+using Gma.System.MouseKeyHook;
 using Pulsar.Common.Enums;
 using Pulsar.Common.Helpers;
 using Pulsar.Common.Messages;
@@ -104,8 +104,17 @@ namespace Pulsar.Server.Forms
             InitializeComponent();
 
             DarkModeManager.ApplyDarkMode(this);
+            ApplyHighDpiImages();
             ScreenCaptureHider.ScreenCaptureHider.Apply(this.Handle);
             UpdateInputButtonsVisualState();
+        }
+
+        private void ApplyHighDpiImages()
+        {
+            float scale = DpiImageScaling.GetScaleFactor(this);
+            DpiImageScaling.ApplyToIconButton(btnMouse, scale);
+            DpiImageScaling.ApplyToIconButton(btnKeyboard, scale);
+            DpiImageScaling.ApplyToIconButton(btnBiDirectionalClipboard, scale);
         }
 
         private void UpdateInputButtonsVisualState()

@@ -1,4 +1,4 @@
-﻿namespace Pulsar.Server.Forms
+namespace Pulsar.Server.Forms
 {
     partial class FrmRemoteChat
     {
@@ -133,7 +133,7 @@
             this.DisableTypeChk.Name = "DisableTypeChk";
             this.DisableTypeChk.Size = new System.Drawing.Size(94, 17);
             this.DisableTypeChk.TabIndex = 2;
-            this.DisableTypeChk.Text = "Enable Typing";
+            this.DisableTypeChk.Text = "允许输入";
             this.DisableTypeChk.UseVisualStyleBackColor = true;
             // 
             // DisableCloseChk
@@ -143,7 +143,7 @@
             this.DisableCloseChk.Name = "DisableCloseChk";
             this.DisableCloseChk.Size = new System.Drawing.Size(123, 17);
             this.DisableCloseChk.TabIndex = 1;
-            this.DisableCloseChk.Text = "Disable Closing Chat";
+            this.DisableCloseChk.Text = "禁止关闭聊天";
             this.DisableCloseChk.UseVisualStyleBackColor = true;
             // 
             // TopMostChk
@@ -155,7 +155,7 @@
             this.TopMostChk.Name = "TopMostChk";
             this.TopMostChk.Size = new System.Drawing.Size(71, 17);
             this.TopMostChk.TabIndex = 0;
-            this.TopMostChk.Text = "Top Most";
+            this.TopMostChk.Text = "置顶显示";
             this.TopMostChk.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -167,7 +167,7 @@
             this.groupBox2.Size = new System.Drawing.Size(350, 42);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Client Window Title";
+            this.groupBox2.Text = "客户端窗口标题";
             // 
             // ChatTitleTB
             // 
@@ -187,7 +187,7 @@
             this.groupBox1.Size = new System.Drawing.Size(350, 42);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Your Name";
+            this.groupBox1.Text = "你的名称";
             // 
             // textBox1
             // 
@@ -196,7 +196,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(344, 20);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "Administrator";
+            this.textBox1.Text = "管理员";
             // 
             // button1
             // 
@@ -205,7 +205,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(350, 23);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Start Chat";
+            this.button1.Text = "开始聊天";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -217,7 +217,7 @@
             this.Chat.Name = "Chat";
             this.Chat.Size = new System.Drawing.Size(356, 405);
             this.Chat.TabIndex = 1;
-            this.Chat.Text = "Chat";
+            this.Chat.Text = "聊天";
             this.Chat.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
@@ -340,10 +340,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(364, 431);
+            this.MinimumSize = new System.Drawing.Size(380, 400);
             this.Controls.Add(this.noButtonTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmRemoteChat";
-            this.Text = "FrmRemoteChat";
+            this.Text = "远程聊天 []";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmRemoteChat_FormClosing);
             this.Load += new System.EventHandler(this.FrmRemoteChat_Load);
             this.noButtonTabControl1.ResumeLayout(false);

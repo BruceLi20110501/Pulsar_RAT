@@ -1,4 +1,4 @@
-﻿namespace Pulsar.Server.Forms
+namespace Pulsar.Server.Forms
 {
     partial class FrmVisitWebsite
     {
@@ -40,9 +40,9 @@
             this.chkVisitHidden.AutoSize = true;
             this.chkVisitHidden.Checked = true;
             this.chkVisitHidden.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkVisitHidden.Location = new System.Drawing.Point(48, 38);
+            this.chkVisitHidden.Location = new System.Drawing.Point(16, 56);
             this.chkVisitHidden.Name = "chkVisitHidden";
-            this.chkVisitHidden.Size = new System.Drawing.Size(170, 17);
+            this.chkVisitHidden.Size = new System.Drawing.Size(170, 19);
             this.chkVisitHidden.TabIndex = 2;
             this.chkVisitHidden.Text = "隐藏访问（推荐）";
             this.chkVisitHidden.UseVisualStyleBackColor = true;
@@ -50,24 +50,26 @@
             // lblURL
             // 
             this.lblURL.AutoSize = true;
-            this.lblURL.Location = new System.Drawing.Point(12, 9);
+            this.lblURL.Location = new System.Drawing.Point(16, 18);
             this.lblURL.Name = "lblURL";
-            this.lblURL.Size = new System.Drawing.Size(30, 13);
+            this.lblURL.Size = new System.Drawing.Size(30, 15);
             this.lblURL.TabIndex = 0;
             this.lblURL.Text = "URL:";
             // 
             // txtURL
             // 
-            this.txtURL.Location = new System.Drawing.Point(48, 6);
+            this.txtURL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtURL.Location = new System.Drawing.Point(56, 15);
             this.txtURL.Name = "txtURL";
-            this.txtURL.Size = new System.Drawing.Size(336, 22);
+            this.txtURL.Size = new System.Drawing.Size(360, 24);
             this.txtURL.TabIndex = 1;
             // 
             // btnVisitWebsite
             // 
-            this.btnVisitWebsite.Location = new System.Drawing.Point(246, 34);
+            this.btnVisitWebsite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVisitWebsite.Location = new System.Drawing.Point(296, 50);
             this.btnVisitWebsite.Name = "btnVisitWebsite";
-            this.btnVisitWebsite.Size = new System.Drawing.Size(138, 23);
+            this.btnVisitWebsite.Size = new System.Drawing.Size(120, 36);
             this.btnVisitWebsite.TabIndex = 3;
             this.btnVisitWebsite.Text = "访问网站";
             this.btnVisitWebsite.UseVisualStyleBackColor = true;
@@ -78,7 +80,7 @@
             this.AcceptButton = this.btnVisitWebsite;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(396, 72);
+            this.ClientSize = new System.Drawing.Size(432, 96);
             this.Controls.Add(this.chkVisitHidden);
             this.Controls.Add(this.lblURL);
             this.Controls.Add(this.txtURL);

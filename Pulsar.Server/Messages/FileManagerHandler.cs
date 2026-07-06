@@ -1,4 +1,4 @@
-﻿using Pulsar.Common.Enums;
+using Pulsar.Common.Enums;
 using Pulsar.Common.IO;
 using Pulsar.Common.Messages;
 using Pulsar.Common.Messages.Administration.FileManager;
@@ -254,7 +254,7 @@ namespace Pulsar.Server.Messages
             fileName = SanitizeFileName(fileName);
             if (fileName == null)
             {
-                OnReport("Download failed: Invalid filename");
+                OnReport("下载失败：无效的文件名");
                 return;
             }
 
@@ -268,7 +268,7 @@ namespace Pulsar.Server.Messages
                 
                 if (!fullPath.StartsWith(baseDir, StringComparison.OrdinalIgnoreCase))
                 {
-                    OnReport("Download failed: Path traversal attempt detected");
+                    OnReport("下载失败：检测到路径穿越尝试");
                     return;
                 }
                 
@@ -276,7 +276,7 @@ namespace Pulsar.Server.Messages
             }
             catch
             {
-                OnReport("Download failed: Invalid path");
+                OnReport("下载失败：无效路径");
                 return;
             }
 
@@ -295,7 +295,7 @@ namespace Pulsar.Server.Messages
                     
                     if (!fullPath.StartsWith(baseDir, StringComparison.OrdinalIgnoreCase))
                     {
-                        OnReport("Download failed: Path validation error");
+                        OnReport("下载失败：路径验证错误");
                         return;
                     }
                     
@@ -303,7 +303,7 @@ namespace Pulsar.Server.Messages
                 }
                 catch
                 {
-                    OnReport("Download failed: Path validation error");
+                    OnReport("下载失败：路径验证错误");
                     return;
                 }
                 
@@ -316,7 +316,7 @@ namespace Pulsar.Server.Messages
                 Type = TransferType.Download,
                 LocalPath = localPath,
                 RemotePath = remotePath,
-                Status = "Pending...",
+                Status = "等待中...",
                 //Size = fileSize, TODO: Add file size here
                 TransferredSize = 0
             };
@@ -327,7 +327,7 @@ namespace Pulsar.Server.Messages
             }
             catch (Exception)
             {
-                transfer.Status = "Error writing file";
+                transfer.Status = "写入文件出错";
                 OnFileTransferUpdated(transfer);
                 return;
             }
@@ -359,7 +359,7 @@ namespace Pulsar.Server.Messages
                     Type = TransferType.Upload,
                     LocalPath = localPath,
                     RemotePath = remotePath,
-                    Status = "Pending...",
+                    Status = "等待中...",
                     TransferredSize = 0
                 };
 
@@ -369,7 +369,7 @@ namespace Pulsar.Server.Messages
                 }
                 catch (Exception)
                 {
-                    transfer.Status = "Error reading file";
+                    transfer.Status = "读取文件出错";
                     OnFileTransferUpdated(transfer);
                     return;
                 }
@@ -391,7 +391,7 @@ namespace Pulsar.Server.Messages
                     {
                         transfer.TransferredSize += chunk.Data.Length;
                         decimal progress = transfer.Size == 0 ? 100 : Math.Round((decimal)((double)transfer.TransferredSize / (double)transfer.Size * 100.0), 2);
-                        transfer.Status = $"Uploading...({progress}%)";
+                        transfer.Status = $"上传中...({progress}%)";
                         OnFileTransferUpdated(transfer);
 
                         bool transferCanceled;
@@ -402,7 +402,7 @@ namespace Pulsar.Server.Messages
 
                         if (transferCanceled)
                         {
-                            transfer.Status = "Canceled";
+                            transfer.Status = "已取消";
                             OnFileTransferUpdated(transfer);
                             _limitThreads.Release();
                             return;
@@ -430,7 +430,7 @@ namespace Pulsar.Server.Messages
                             return;
                         }
                     }
-                    transfer.Status = "Error reading file";
+                    transfer.Status = "读取文件出错";
                     OnFileTransferUpdated(transfer);
                     CancelFileTransfer(transfer.Id);
                     _limitThreads.Release();
@@ -531,14 +531,14 @@ namespace Pulsar.Server.Messages
             }
             catch (Exception)
             {
-                transfer.Status = "Error writing file";
+                transfer.Status = "写入文件出错";
                 OnFileTransferUpdated(transfer);
                 CancelFileTransfer(transfer.Id);
                 return;
             }
 
             decimal progress = transfer.Size == 0 ? 100 : Math.Round((decimal)((double)transfer.TransferredSize / (double)transfer.Size * 100.0), 2);
-            transfer.Status = $"Downloading...({progress}%)";
+            transfer.Status = $"下载中...({progress}%)";
 
             OnFileTransferUpdated(transfer);
         }
@@ -573,7 +573,7 @@ namespace Pulsar.Server.Messages
             if (transfer != null)
             {
                 transfer.RemotePath = message.FilePath; // required for temporary file names generated on the client
-                transfer.Status = "Completed";
+                transfer.Status = "已完成";
                 RemoveFileTransfer(transfer.Id);
                 OnFileTransferUpdated(transfer);
             }
@@ -604,7 +604,7 @@ namespace Pulsar.Server.Messages
         private void ProcessActionPerformed(object sender, ProcessAction action, bool result)
         {
             if (action != ProcessAction.Start) return;
-            OnReport(result ? "Process started successfully" : "Process failed to start");
+            OnReport(result ? "进程启动成功" : "进程启动失败");
         }
 
         /// <summary>

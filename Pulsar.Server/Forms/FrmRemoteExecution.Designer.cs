@@ -1,4 +1,4 @@
-﻿namespace Pulsar.Server.Forms
+namespace Pulsar.Server.Forms
 {
     partial class FrmRemoteExecution
     {
@@ -254,6 +254,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             ClientSize = new System.Drawing.Size(503, 521);
+            MinimumSize = new System.Drawing.Size(400, 350);
             Controls.Add(btnBrowseRunPE);
             Controls.Add(txtRunPECustomPath);
             Controls.Add(lblRunPETarget);

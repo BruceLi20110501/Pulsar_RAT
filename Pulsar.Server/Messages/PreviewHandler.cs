@@ -1,4 +1,4 @@
-﻿using Pulsar.Common.Enums;
+using Pulsar.Common.Enums;
 using Pulsar.Common.Messages;
 using Pulsar.Common.Messages.Other;
 using Pulsar.Common.Messages.Preview;
@@ -185,15 +185,13 @@ namespace Pulsar.Server.Messages
                 {
                     // Create columns if they don't exist
                     if (_verticleStatsTable.Columns.Count == 0)
-                        _verticleStatsTable.Columns.Add("Names", 100);
+                        _verticleStatsTable.Columns.Add("名称", 100);
                     if (_verticleStatsTable.Columns.Count == 1)
-                        _verticleStatsTable.Columns.Add("Stats", 150);
+                        _verticleStatsTable.Columns.Add("数值", 150);
                 }
 
-                // Clear existing items to avoid duplicate entries
                 _verticleStatsTable.Items.Clear();
 
-                // Add the stats as new items
                 var cpuItem = new ListViewItem("CPU");
                 cpuItem.SubItems.Add(message.CPU);
                 _verticleStatsTable.Items.Add(cpuItem);
@@ -217,27 +215,27 @@ namespace Pulsar.Server.Messages
                     _verticleStatsTable.Items.Add(ramItem);
                 }
 
-                var uptimeItem = new ListViewItem("Uptime");
+                var uptimeItem = new ListViewItem("运行时间");
                 uptimeItem.SubItems.Add(message.Uptime);
                 _verticleStatsTable.Items.Add(uptimeItem);
 
-                var antivirusItem = new ListViewItem("Antivirus");
+                var antivirusItem = new ListViewItem("杀毒软件");
                 antivirusItem.SubItems.Add(message.AV);
                 _verticleStatsTable.Items.Add(antivirusItem);
 
-                var mainBrowserItem = new ListViewItem("Default Browser");
+                var mainBrowserItem = new ListViewItem("默认浏览器");
                 mainBrowserItem.SubItems.Add(message.MainBrowser);
                 _verticleStatsTable.Items.Add(mainBrowserItem);
 
                 var pingItem = new ListViewItem("Ping");
-                pingItem.SubItems.Add(_lastPingMs >= 0 ? _lastPingMs + " ms" : "N/A");
+                pingItem.SubItems.Add(_lastPingMs >= 0 ? _lastPingMs + " ms" : "不可用");
                 _verticleStatsTable.Items.Add(pingItem);
 
-                var webcamItem = new ListViewItem("Webcam");
-                webcamItem.SubItems.Add(message.HasWebcam ? "Yes" : "No");
+                var webcamItem = new ListViewItem("摄像头");
+                webcamItem.SubItems.Add(message.HasWebcam ? "是" : "否");
                 _verticleStatsTable.Items.Add(webcamItem);
 
-                var afkItem = new ListViewItem("AFK Time");
+                var afkItem = new ListViewItem("离开时间");
                 afkItem.SubItems.Add(message.AFKTime);
                 _verticleStatsTable.Items.Add(afkItem);
             }

@@ -1,4 +1,4 @@
-﻿namespace Pulsar.Server.Forms
+namespace Pulsar.Server.Forms
 {
     partial class FrmAbout
     {
@@ -63,16 +63,16 @@
             lblTitle.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             lblTitle.Location = new System.Drawing.Point(82, 7);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new System.Drawing.Size(69, 30);
+            lblTitle.Size = new System.Drawing.Size(172, 37);
             lblTitle.TabIndex = 0;
-            lblTitle.Text = "Pulsar";
+            lblTitle.Text = "Pulsar STNull";
             // 
             // lblVersion
             // 
             lblVersion.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, 0);
-            lblVersion.Location = new System.Drawing.Point(438, 41);
+            lblVersion.Location = new System.Drawing.Point(438, 37);
             lblVersion.Name = "lblVersion";
-            lblVersion.Size = new System.Drawing.Size(75, 13);
+            lblVersion.Size = new System.Drawing.Size(75, 17);
             lblVersion.TabIndex = 2;
             lblVersion.Text = "%VERSION%";
             lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -82,7 +82,7 @@
             btnOkay.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             btnOkay.Location = new System.Drawing.Point(438, 370);
             btnOkay.Name = "btnOkay";
-            btnOkay.Size = new System.Drawing.Size(75, 23);
+            btnOkay.Size = new System.Drawing.Size(75, 33);
             btnOkay.TabIndex = 8;
             btnOkay.Text = "确定";
             btnOkay.UseVisualStyleBackColor = true;
@@ -91,11 +91,11 @@
             // rtxtContent
             // 
             rtxtContent.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            rtxtContent.Location = new System.Drawing.Point(15, 260);
+            rtxtContent.Location = new System.Drawing.Point(15, 265);
             rtxtContent.Name = "rtxtContent";
             rtxtContent.ReadOnly = true;
             rtxtContent.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            rtxtContent.Size = new System.Drawing.Size(498, 104);
+            rtxtContent.Size = new System.Drawing.Size(498, 99);
             rtxtContent.TabIndex = 7;
             rtxtContent.Text = "";
             // 
@@ -105,7 +105,7 @@
             lblLicense.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             lblLicense.Location = new System.Drawing.Point(15, 242);
             lblLicense.Name = "lblLicense";
-            lblLicense.Size = new System.Drawing.Size(46, 15);
+            lblLicense.Size = new System.Drawing.Size(57, 20);
             lblLicense.TabIndex = 6;
             lblLicense.Text = "许可证";
             // 
@@ -114,7 +114,7 @@
             lnkCredits.AutoSize = true;
             lnkCredits.Location = new System.Drawing.Point(415, 83);
             lnkCredits.Name = "lnkCredits";
-            lnkCredits.Size = new System.Drawing.Size(46, 13);
+            lnkCredits.Size = new System.Drawing.Size(51, 19);
             lnkCredits.TabIndex = 5;
             lnkCredits.TabStop = true;
             lnkCredits.Text = "许可证";
@@ -125,10 +125,10 @@
             lnkGithubPage.AutoSize = true;
             lnkGithubPage.Location = new System.Drawing.Point(84, 61);
             lnkGithubPage.Name = "lnkGithubPage";
-            lnkGithubPage.Size = new System.Drawing.Size(107, 13);
+            lnkGithubPage.Size = new System.Drawing.Size(168, 19);
             lnkGithubPage.TabIndex = 3;
             lnkGithubPage.TabStop = true;
-            lnkGithubPage.Text = "Pulsar GitHub 页面";
+            lnkGithubPage.Text = "Pulsar STNull GitHub 页面";
             lnkGithubPage.LinkClicked += lnkGithubPage_LinkClicked;
             // 
             // lnkTelegram
@@ -136,7 +136,7 @@
             lnkTelegram.AutoSize = true;
             lnkTelegram.Location = new System.Drawing.Point(415, 63);
             lnkTelegram.Name = "lnkTelegram";
-            lnkTelegram.Size = new System.Drawing.Size(81, 13);
+            lnkTelegram.Size = new System.Drawing.Size(96, 19);
             lnkTelegram.TabIndex = 4;
             lnkTelegram.TabStop = true;
             lnkTelegram.Text = "Telegram 群聊";
@@ -148,7 +148,7 @@
             lblSubTitle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             lblSubTitle.Location = new System.Drawing.Point(84, 37);
             lblSubTitle.Name = "lblSubTitle";
-            lblSubTitle.Size = new System.Drawing.Size(104, 17);
+            lblSubTitle.Size = new System.Drawing.Size(112, 23);
             lblSubTitle.TabIndex = 1;
             lblSubTitle.Text = "远程控制工具";
             // 
@@ -158,7 +158,7 @@
             label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             label1.Location = new System.Drawing.Point(12, 108);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(228, 15);
+            label1.Size = new System.Drawing.Size(281, 20);
             label1.TabIndex = 9;
             label1.Text = "感谢以下贡献者使这个项目成为问世：";
             // 
@@ -178,7 +178,7 @@
             button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             button1.Location = new System.Drawing.Point(12, 370);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(111, 23);
+            button1.Size = new System.Drawing.Size(111, 33);
             button1.TabIndex = 12;
             button1.Text = "开发者留言";
             button1.UseVisualStyleBackColor = true;
@@ -187,9 +187,9 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new System.Drawing.Point(196, 61);
+            linkLabel1.Location = new System.Drawing.Point(84, 80);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new System.Drawing.Size(112, 13);
+            linkLabel1.Size = new System.Drawing.Size(133, 19);
             linkLabel1.TabIndex = 13;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Quasar GitHub 页面";
@@ -198,7 +198,7 @@
             // FrmAbout
             // 
             AcceptButton = btnOkay;
-            AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             CancelButton = btnOkay;
             ClientSize = new System.Drawing.Size(525, 405);
@@ -223,7 +223,7 @@
             MinimizeBox = false;
             Name = "FrmAbout";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Pulsar 企业版 - 关于";
+            Text = "Pulsar STNull - 关于";
             Load += FrmAbout_Load;
             ((System.ComponentModel.ISupportInitialize)picIcon).EndInit();
             ResumeLayout(false);
